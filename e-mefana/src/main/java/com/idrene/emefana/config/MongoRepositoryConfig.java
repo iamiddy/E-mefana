@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import com.mongodb.Mongo;
@@ -52,6 +53,11 @@ public class MongoRepositoryConfig extends AbstractMongoConfiguration {
 	protected String getDatabaseName() {
 		return environment.getProperty(PROPERTY_NAME_DATABASE_NAME);
 	}
+	
+	 @Bean
+	  public GridFsTemplate gridFsTemplate() throws Exception {
+	    return new GridFsTemplate(mongoDbFactory(), mappingMongoConverter());
+	  }
 
 	// void replicaLSet() throws UnknownHostException {
 	// MongoCredential credential =

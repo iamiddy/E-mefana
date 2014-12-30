@@ -14,7 +14,6 @@ public class PersonaRepositoryTest extends AbstractIntegrationTest{
 	
 	 @Autowired 
 	 private PersonRepository repository;
-	
 
 	@Before
 	public void setUp() throws Exception {

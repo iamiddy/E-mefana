@@ -10,7 +10,6 @@ import com.wordnik.swagger.annotations.Api;
 @Controller
 @Api(value="Hello", description="Operations on Businesses", position = 2)
 public class HelloWorldController {
-
 	@RequestMapping("/hello")
 	public String hello(
 			@RequestParam(value = "name", required = false, defaultValue = "World") String name,
