@@ -1,0 +1,32 @@
+/target/
+-.DS_Store
+-*.iml
+-*.ipr
+-*.iws
+-*.orig
+-target
++.DS_Store
++*.iml
++*.ipr
++*.iws
++*.orig
++target
+ .springBeans
+ .sonar4clipse
+-*.sonar4clipseExternals
+-.ant-targets-build.xml
+-.settings/
+-.project
+-.classpath
+-src/ant/.ant-targets-upload-dist.xml
+-atlassian-ide-plugin.xml
+-/.gradle/
++*.sonar4clipseExternals
++.ant-targets-build.xml
++.settings/
++.project
++.classpath
++src/ant/.ant-targets-upload-dist.xml
++atlassian-ide-plugin.xml
++/.gradle/
++/.idea/
