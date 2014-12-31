@@ -38,10 +38,10 @@ class PersonController {
 		return new ResponseEntity<>(assembler.toResource(persons),HttpStatus.OK);
 	}
 	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+
 	@RequestMapping(value = "/people", method = RequestMethod.GET)
 	ResponseEntity<Resources<Resource<Person>>> people(Pageable pageable,
-			PagedResourcesAssembler assembler) {
+			@SuppressWarnings("rawtypes") PagedResourcesAssembler assembler) {
 		
 		List<Person> pp = new ArrayList<>();
 		pp.add(new Person("","Jane", "Doe"));

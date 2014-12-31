@@ -1,4 +1,4 @@
-package com.idrene.emefana;
+package com.idrene.emefana.repositories;
 
 import static org.junit.Assert.*;
 
@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.idrene.emefana.AbstractIntegrationTest;
 import com.idrene.emefana.domain.Person;
 import com.idrene.emefana.repositories.PersonRepository;
 
