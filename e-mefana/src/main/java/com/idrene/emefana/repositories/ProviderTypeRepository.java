@@ -11,6 +11,6 @@ import com.idrene.emefana.domain.ProviderType;
  * @author iddymagohe
  *
  */
-public interface ProviderTyperepository extends MongoRepository<ProviderType, String> {
+public interface ProviderTypeRepository extends MongoRepository<ProviderType, String> {
 	
 }

@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -22,7 +23,12 @@ public class City {
 	@Getter @Setter private String cid;
 	
 	@Field("region")
+	@Indexed
 	@Getter @Setter private String region;
+	
+	@Field("country")
+	@Indexed
+	@Getter @Setter private String country;
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()

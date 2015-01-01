@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.idrene.emefana.AbstractIntegrationTest;
 import com.idrene.emefana.domain.City;
+import com.idrene.emefana.domain.EventType;
 import com.idrene.emefana.domain.ProviderType;
 import com.idrene.emefana.domain.ServiceOffering;
 
@@ -31,10 +32,13 @@ public class RepositoriesTest extends AbstractIntegrationTest {
 	private CityRepository cityRepository;
 
 	@Autowired
-	private ProviderTyperepository providerTypeRepository;
+	private ProviderTypeRepository providerTypeRepository;
 
 	@Autowired
 	private ServiceOfferingRepository offeringTypeRepository;
+
+	@Autowired
+	private EventTypeRepository eventTypeRepository;
 
 	@Test
 	public void findByIdTest() {
@@ -60,31 +64,39 @@ public class RepositoriesTest extends AbstractIntegrationTest {
 	public void saveServicesTest() {
 		offeringTypeRepository.deleteAll();
 		Map<String, Set<ProviderType>> servicesMap = new HashMap<>();
-		
-		List<String> typesRandom = Arrays.asList("precede", "deliver", "rampant",
-				"lewd", "lunch", "great", "contain", "offer", "screw",
-				"handsomely", "snobbish", "flashy", "pencil", "man", "squeal",
-				"shelf", "wound", "moon", "optimal", "carry");
-		
+
+		List<String> typesRandom = Arrays.asList("precede", "deliver",
+				"rampant", "lewd", "lunch", "great", "contain", "offer",
+				"screw", "handsomely", "snobbish", "flashy", "pencil", "man",
+				"squeal", "shelf", "wound", "moon", "optimal", "carry");
+
 		int randomsize = typesRandom.size();
-		typesRandom.forEach(service -> servicesMap.put(service, new HashSet<>()));
-		
+		typesRandom.forEach(service -> servicesMap
+				.put(service, new HashSet<>()));
+
 		List<ProviderType> pTypes = providerTypeRepository.findAll();
 		pTypes.forEach(type -> {
-			int randomApp =  1 + (int) (Math.random() * 10) ;
-			while(randomApp > 0){
-				int randomCatNumber =  (int) (Math.random() * randomsize) ;
+			int randomApp = 1 + (int) (Math.random() * 10);
+			while (randomApp > 0) {
+				int randomCatNumber = (int) (Math.random() * randomsize);
 				String serv = typesRandom.get(randomCatNumber);
 				servicesMap.get(serv).add(type);
 				randomApp--;
 			}
 		});
-		
-		servicesMap.forEach((key,value) -> offeringTypeRepository.save(new ServiceOffering(key, value)));
+
+		servicesMap.forEach((key, value) -> offeringTypeRepository
+				.save(new ServiceOffering(key, value)));
 		List<ServiceOffering> offerings = offeringTypeRepository.findAll();
 		assertNotNull(offerings);
 		assertTrue(randomsize == offerings.size());
 	}
 
+	@Test
+	public void eventTypeRetrievalTest() {
+		List<EventType> events_type = eventTypeRepository.findAll();
+		assertNotNull(events_type);
+		assertTrue(events_type.size() > 0);
+	}
 
 }
