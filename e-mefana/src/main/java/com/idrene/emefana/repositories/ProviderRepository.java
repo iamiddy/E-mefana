@@ -18,7 +18,7 @@ import com.idrene.emefana.domain.Provider;
  */
 public interface ProviderRepository extends MongoRepository<Provider,String>{
 	
-	Page<Provider> findByCityOrderByNameASC(City city, Pageable pegiable);
+	Page<Provider> findByAddressCityOrderByNameAsc(City city, Pageable pegiable);
 	
-	Page<Provider> findByCityOrderByScoreDesc(City city,TextCriteria criteria, Pageable pageable);
+	Page<Provider> findByAddressCityOrderByScoreDesc(City city,TextCriteria criteria, Pageable pageable);
 }
