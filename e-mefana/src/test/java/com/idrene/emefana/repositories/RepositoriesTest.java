@@ -7,6 +7,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -30,16 +31,21 @@ import org.springframework.data.geo.Point;
 import org.springframework.util.CollectionUtils;
 
 import com.idrene.emefana.AbstractIntegrationTest;
+import com.idrene.emefana.domain.Booking;
+import com.idrene.emefana.domain.BookingStatus;
+import com.idrene.emefana.domain.BookingStatus.BOOKINGSTATE;
 import com.idrene.emefana.domain.City;
 import com.idrene.emefana.domain.Contact;
 import com.idrene.emefana.domain.Contact.ContactTypeEnum;
 import com.idrene.emefana.domain.EventType;
 import com.idrene.emefana.domain.Feature;
+import com.idrene.emefana.domain.Person;
 import com.idrene.emefana.domain.Price;
 import com.idrene.emefana.domain.Provider;
 import com.idrene.emefana.domain.ProviderService;
 import com.idrene.emefana.domain.ProviderType;
 import com.idrene.emefana.domain.ServiceOffering;
+import com.idrene.emefana.util.DateConvertUtil;
 import com.idrene.emefana.util.EmefanaIDGenerator;
 
 
@@ -84,6 +90,12 @@ public class RepositoriesTest extends AbstractIntegrationTest {
 
 	@Autowired
 	private ProviderRepository providerRepository;
+	
+	@Autowired
+	private BookingRepository bookingRepository;
+	
+	@Autowired 
+	 private PersonRepository userRepository;
 
 	@Test
 	public void findByIdTest() {
@@ -335,5 +347,34 @@ public class RepositoriesTest extends AbstractIntegrationTest {
 		geoResults.forEach(gp -> System.out.println(gp.getContent().getName() + " - " + gp.getDistance()));
 		assertTrue(geoResults.getAverageDistance().getValue() > 0);
 	}
-
+	
+	@Test
+	public void saveBookingTest(){ 
+		bookingRepository.deleteAll();
+		List<Provider> prvs = providerRepository.findAll();
+		List<EventType> events = eventTypeRepository.findAll();
+		Provider p = prvs.get(0);
+				
+		EventType event = events.get(0);
+	    Person customer = userRepository.findByLastName("Magohe").get(0); 
+	    
+	    Booking booking = new Booking();
+	    booking.setBid(EmefanaIDGenerator.generateProviderId());
+	    booking.setCustomer(customer);
+	    booking.setProvider(p);
+	    booking.setEvent(event);
+	    booking.setStartDate(DateConvertUtil.asUtilDate(LocalDate.now()));
+	    booking.setEndDate(DateConvertUtil.asUtilDate((LocalDate.now().plusDays(1))));
+	    booking.setStatus(new BookingStatus(p.getPrice(), null,BOOKINGSTATE.NEW));
+	    bookingRepository.save(booking);
+	    
+	    
+	    Booking savedb = bookingRepository.findOne(booking.getBid());
+	    assertNotNull(savedb);
+	}
+	
+	
+	//Date input = new Date();
+	//LocalDate date = input.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+	//LocalDate.from(Instant.ofEpochMilli(date.getTime()))
 }
