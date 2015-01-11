@@ -13,7 +13,8 @@ import lombok.Setter;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.TypeAlias;
-import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.index.GeoSpatialIndexType;
+import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
 import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -38,7 +39,7 @@ public class Provider {
 	@TextIndexed(weight = 2)
 	@Getter @Setter private String description;
 	
-	@Indexed
+	@GeoSpatialIndexed(type=GeoSpatialIndexType.GEO_2DSPHERE)
 	@Getter @Setter private double[] location;
 	
 	@DBRef

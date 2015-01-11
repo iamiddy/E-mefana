@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.idrene.emefana.config;
+package com.idrene.emefana.util;
 
 import java.util.Locale;
 
