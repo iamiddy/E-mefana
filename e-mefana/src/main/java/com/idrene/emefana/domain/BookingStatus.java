@@ -19,7 +19,7 @@ public class BookingStatus {
 	@Getter @Setter BOOKINGSTATE currentState; 
 	
 	public enum BOOKINGSTATE {
-		NEW, CONFIRMED, FULLFILMENT, DONE, CANCELLED
+		NEW, CONFIRMED, FULFILLMENT, DONE, CANCELLED
 	}
 
 	/**
