@@ -4,6 +4,8 @@
 package com.idrene.emefana.domain;
 
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -41,6 +43,8 @@ public class Booking {
 	@Getter @Setter Date endDate;
 	
 	@Getter @Setter BookingStatus status;
+	
+	@Getter @Setter private List<BookingService> services = new LinkedList<>();
 	
 	
 }

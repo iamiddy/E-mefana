@@ -53,7 +53,7 @@ public class Provider {
 	
 	@Getter @Setter private String hours;
 	
-	@Getter @Setter private List<ProviderEvents> events;
+	@Getter @Setter private Set<ProviderEvents> events = new HashSet<>();
 	
 	@Getter @Setter private List<Feature> features = new LinkedList<>();
 	

@@ -42,6 +42,7 @@ import com.idrene.emefana.domain.Feature;
 import com.idrene.emefana.domain.Person;
 import com.idrene.emefana.domain.Price;
 import com.idrene.emefana.domain.Provider;
+import com.idrene.emefana.domain.ProviderEvents;
 import com.idrene.emefana.domain.ProviderService;
 import com.idrene.emefana.domain.ProviderType;
 import com.idrene.emefana.domain.ServiceOffering;
@@ -225,7 +226,7 @@ public class RepositoriesTest extends AbstractIntegrationTest {
 //		}
 //	}
 	
-	@Test
+	//@Test
 	public void updateDescriptionsTest(){
 			venuesDescr.stream().map(s -> s.split(":")).forEach(s -> {
 				venuesDescrMap.put(s[0], s[1]);
@@ -240,7 +241,7 @@ public class RepositoriesTest extends AbstractIntegrationTest {
 				});
 	}
 	
-	@Test
+	//@Test
 	public void updateContacts(){
 		List<Provider> prvs = providerRepository.findAll();
 		updateProvidersLambda(prvs,
@@ -250,7 +251,7 @@ public class RepositoriesTest extends AbstractIntegrationTest {
 				});
 	}
 	
-	@Test
+	//@Test
 	public void updateFeatures(){
 		List<Provider> prvs = providerRepository.findAll();
 		updateProvidersLambda(prvs,
@@ -258,7 +259,7 @@ public class RepositoriesTest extends AbstractIntegrationTest {
 				provider -> provider.setFeatures(randomFeature()));
 	}
 	
-	@Test
+	//@Test
 	public void updateCapacity(){
 		List<Provider> prvs = providerRepository.findAll();
 		updateProvidersLambda(prvs,
@@ -266,13 +267,42 @@ public class RepositoriesTest extends AbstractIntegrationTest {
 				provider -> provider.setCapacity(capacity()));
 	}
 	
-	@Test
+	//@Test
 	public void updatePrice(){
 		List<Provider> prvs = providerRepository.findAll();
 		updateProvidersLambda(prvs,
 				provider -> provider.getPrice() == null,
 				provider -> provider.setPrice(new Price(price(),null)));
 	}
+	
+	@Test
+	public void updateProviderEvent(){
+		List<Provider> prvs = providerRepository.findAll();
+		List<EventType> events = eventTypeRepository.findAll();
+		updateProvidersLambda(prvs,
+				provider -> provider.getEvents().size()==0,
+				provider -> {
+					int size = events.size();
+					int random = 3;
+					while (random >= 0) {
+						provider.getEvents().add(
+								new ProviderEvents(events.get(randInt(random,size - random)), ""));
+						random--;
+					}
+
+				});
+	}
+	
+	//@Test
+	public void clearProviderEvent(){
+		List<Provider> prvs = providerRepository.findAll();
+		updateProvidersLambda(prvs,
+				provider -> true,
+				provider -> provider.getEvents().clear()
+				);
+	}
+	
+	
 	
 	static int capacity(){
 		return (int) (Math.random() * 300) + 100;
@@ -373,6 +403,18 @@ public class RepositoriesTest extends AbstractIntegrationTest {
 	    assertNotNull(savedb);
 	}
 	
+	public static int randInt(int min, int max) {
+
+	    // NOTE: Usually this should be a field rather than a method
+	    // variable so that it is not re-seeded every call.
+	    Random rand = new Random();
+
+	    // nextInt is normally exclusive of the top value,
+	    // so add 1 to make it inclusive
+	    int randomNum = rand.nextInt((max - min) + 1) + min;
+
+	    return randomNum;
+	}
 	
 	//Date input = new Date();
 	//LocalDate date = input.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
