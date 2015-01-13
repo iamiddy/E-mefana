@@ -45,9 +45,11 @@ import com.idrene.emefana.domain.Provider;
 import com.idrene.emefana.domain.ProviderEvents;
 import com.idrene.emefana.domain.ProviderService;
 import com.idrene.emefana.domain.ProviderType;
+import com.idrene.emefana.domain.QProvider;
 import com.idrene.emefana.domain.ServiceOffering;
 import com.idrene.emefana.util.DateConvertUtil;
 import com.idrene.emefana.util.EmefanaIDGenerator;
+import com.mysema.query.BooleanBuilder;
 
 
 /**
@@ -370,8 +372,8 @@ public class RepositoriesTest extends AbstractIntegrationTest {
 	public void closestestPointsToMwengeTest(){
 		Point mwenge = new Point(39.229809,-6.769280);
 		GeoResults<Provider> geoResults = providerRepository
-				.findByLocationNear(mwenge,
-						new Distance(10, Metrics.KILOMETERS));
+				.findByLocationNearAndNameIgnoreCase(mwenge,
+						new Distance(10, Metrics.KILOMETERS),"Kariakoo");
 		
 		assertNotNull(geoResults);
 		geoResults.forEach(gp -> System.out.println(gp.getContent().getName() + " - " + gp.getDistance()));
@@ -403,6 +405,27 @@ public class RepositoriesTest extends AbstractIntegrationTest {
 	    assertNotNull(savedb);
 	}
 	
+	@Test
+	public void qsdlTest(){
+		QProvider provider = new QProvider("provider");
+		Provider p = providerRepository.findOne(provider.name.equalsIgnoreCase("jolly"));
+		assertTrue(p.getName().equalsIgnoreCase("JOLLY"));
+	}
+	
+	
+	
+	@Test
+	public void qsdlBooleanBuilderTest(){
+		QProvider provider =QProvider.provider;
+		BooleanBuilder prov = new BooleanBuilder();
+		prov.and(provider.name.equalsIgnoreCase("Kariakoo"));
+		EventType event = new EventType();
+		event.setEid("Weddings");
+		prov.and(provider.events.contains(new ProviderEvents(event, "")));
+		//provider.events.
+		Provider p = providerRepository.findOne(prov.getValue());
+		assertTrue(p.getName().equalsIgnoreCase("KARIAKOO"));
+	}
 	public static int randInt(int min, int max) {
 
 	    // NOTE: Usually this should be a field rather than a method
