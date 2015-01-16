@@ -3,7 +3,10 @@
  */
 package com.idrene.emefana.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.jasypt.util.text.BasicTextEncryptor;
+import org.jasypt.util.text.StrongTextEncryptor;
+import org.jasypt.util.text.TextEncryptor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +14,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-import org.springframework.core.env.Environment;
+
+import com.idrene.emefana.util.UtilityBean;
 
 /**
  * @author iddymagohe
@@ -21,9 +25,9 @@ import org.springframework.core.env.Environment;
 @ComponentScan(basePackages={"com.idrene.emefana.domain","com.idrene.emefana.repositories"})
 @PropertySource(value = { "classpath:application.properties" })
 public class ServiceConfig {
-
-	@Autowired
-	private Environment env;
+	
+	@Value("$app.encoder.key")
+	private String app_encrypt;
 
 	@Bean
 	public static PropertySourcesPlaceholderConfigurer placeHolderConfigurer() {
@@ -50,5 +54,17 @@ public class ServiceConfig {
 	@Bean
 	public CacheManager cacheManager() {
 		return new ConcurrentMapCacheManager();
+	}
+	
+	@Bean
+	public UtilityBean utilityBean(){
+		return new UtilityBean();
+	}
+	
+	@Bean
+	public TextEncryptor textEncryptor(){
+		BasicTextEncryptor encrpt = new BasicTextEncryptor();
+		encrpt.setPassword(app_encrypt);
+		return encrpt;
 	}
 }

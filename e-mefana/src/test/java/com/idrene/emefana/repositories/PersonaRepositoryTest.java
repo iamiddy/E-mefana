@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.idrene.emefana.AbstractIntegrationTest;
-import com.idrene.emefana.domain.Person;
+import com.idrene.emefana.domain.User;
 import com.idrene.emefana.repositories.PersonRepository;
 
 public class PersonaRepositoryTest extends AbstractIntegrationTest{
@@ -28,11 +28,11 @@ public class PersonaRepositoryTest extends AbstractIntegrationTest{
 	public void testMongoOps() {
 		 repository.deleteAll();
 		 assertTrue(0 == repository.count());
-	     Person person = new Person("IDRENE","Iddy","Magohe");
+	     User person = new User("IDRENE","Iddy","Magohe");
 	     person = repository.save(person);
 	     
-	     Person lastNameResults = repository.findByLastName("Magohe").get(0);
-	     Person firstNameResults = repository.findByFirstNameLike("Id*").get(0);
+	     User lastNameResults = repository.findByLastName("Magohe").get(0);
+	     User firstNameResults = repository.findByFirstNameLike("Id*").get(0);
 	     assertNotNull(lastNameResults);
 	     assertNotNull(firstNameResults);
 	}

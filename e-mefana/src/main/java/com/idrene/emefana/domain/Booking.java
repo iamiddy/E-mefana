@@ -28,7 +28,7 @@ public class Booking {
 	@Getter @Setter private String bid;
 	
 	@DBRef
-	@Getter @Setter Person customer;
+	@Getter @Setter User customer;
 	
 	@DBRef
 	@Getter @Setter private Provider provider;

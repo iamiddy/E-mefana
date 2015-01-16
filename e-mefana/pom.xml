@@ -12,6 +12,7 @@
 		<spring-data-rest-version>2.2.1.RELEASE</spring-data-rest-version>
 		<spring-version>4.1.3.RELEASE</spring-version>
 		<querydsl.version>3.6.0</querydsl.version>
+		<jasypt.version>1.9.2</jasypt.version>
 	</properties>
 
 	<dependencyManagement>
@@ -194,6 +195,13 @@
 			<groupId>com.mysema.querydsl</groupId>
 			<artifactId>querydsl-mongodb</artifactId>
 			<version>${querydsl.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jasypt</groupId>
+			<artifactId>jasypt</artifactId>
+			<version>${jasypt.version}</version>
+			<scope>compile</scope> 
 		</dependency>
 
 

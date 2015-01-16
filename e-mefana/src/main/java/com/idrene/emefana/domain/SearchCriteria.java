@@ -11,6 +11,7 @@ import java.util.OptionalInt;
 import lombok.Getter;
 import lombok.Setter;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Pageable;
 
 /**
@@ -72,7 +73,7 @@ public class SearchCriteria {
 	}
 	
 	public Optional<String> getOProviderType(){
-		return Optional.ofNullable(providerType);
+		return Optional.ofNullable(StringUtils.trimToNull(providerType));
 	}
 }
 

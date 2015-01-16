@@ -17,7 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.idrene.emefana.domain.Person;
+import com.idrene.emefana.domain.User;
 import com.idrene.emefana.repositories.PersonRepository;
 import com.wordnik.swagger.annotations.Api;
 
@@ -33,20 +33,20 @@ class PersonController {
 	HttpEntity<PagedResources> persons(Pageable pageable,
 			PagedResourcesAssembler assembler) {
 		
-		Page<Person> persons = personRepository.findAll(pageable);
+		Page<User> persons = personRepository.findAll(pageable);
 		
 		return new ResponseEntity<>(assembler.toResource(persons),HttpStatus.OK);
 	}
 	
 
 	@RequestMapping(value = "/people", method = RequestMethod.GET)
-	ResponseEntity<Resources<Resource<Person>>> people(Pageable pageable,
+	ResponseEntity<Resources<Resource<User>>> people(Pageable pageable,
 			@SuppressWarnings("rawtypes") PagedResourcesAssembler assembler) {
 		
-		List<Person> pp = new ArrayList<>();
-		pp.add(new Person("","Jane", "Doe"));
-		pp.add(new Person("","Billy Bob", "Thornton"));
-		Resources<Resource<Person>>folks=Resources.wrap(pp);
+		List<User> pp = new ArrayList<>();
+		pp.add(new User("","Jane", "Doe"));
+		pp.add(new User("","Billy Bob", "Thornton"));
+		Resources<Resource<User>>folks=Resources.wrap(pp);
 		return new ResponseEntity<>(folks,HttpStatus.OK);
 	}
 }

@@ -24,6 +24,7 @@ import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.geo.Distance;
 import org.springframework.data.geo.GeoResults;
 import org.springframework.data.geo.Metrics;
@@ -39,7 +40,6 @@ import com.idrene.emefana.domain.Contact;
 import com.idrene.emefana.domain.Contact.ContactTypeEnum;
 import com.idrene.emefana.domain.EventType;
 import com.idrene.emefana.domain.Feature;
-import com.idrene.emefana.domain.Person;
 import com.idrene.emefana.domain.Price;
 import com.idrene.emefana.domain.Provider;
 import com.idrene.emefana.domain.ProviderEvents;
@@ -47,6 +47,7 @@ import com.idrene.emefana.domain.ProviderService;
 import com.idrene.emefana.domain.ProviderType;
 import com.idrene.emefana.domain.QProvider;
 import com.idrene.emefana.domain.ServiceOffering;
+import com.idrene.emefana.domain.User;
 import com.idrene.emefana.util.DateConvertUtil;
 import com.idrene.emefana.util.EmefanaIDGenerator;
 import com.mysema.query.BooleanBuilder;
@@ -99,6 +100,9 @@ public class RepositoriesTest extends AbstractIntegrationTest {
 	
 	@Autowired 
 	 private PersonRepository userRepository;
+	
+	@Value("${app.encoder.key}")
+	private String key;
 
 	@Test
 	public void findByIdTest() {
@@ -388,7 +392,7 @@ public class RepositoriesTest extends AbstractIntegrationTest {
 		Provider p = prvs.get(0);
 				
 		EventType event = events.get(0);
-	    Person customer = userRepository.findByLastName("Magohe").get(0); 
+	    User customer = userRepository.findByLastName("Magohe").get(0); 
 	    
 	    Booking booking = new Booking();
 	    booking.setBid(EmefanaIDGenerator.generateProviderId());
@@ -416,6 +420,7 @@ public class RepositoriesTest extends AbstractIntegrationTest {
 	
 	@Test
 	public void qsdlBooleanBuilderTest(){
+		System.out.println("Key -----" + key);
 		QProvider provider =QProvider.provider;
 		BooleanBuilder prov = new BooleanBuilder();
 		prov.and(provider.name.equalsIgnoreCase("Kariakoo"));

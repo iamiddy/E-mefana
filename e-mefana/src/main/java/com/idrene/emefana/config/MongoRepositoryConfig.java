@@ -5,6 +5,7 @@ package com.idrene.emefana.config;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -25,21 +26,23 @@ import com.mongodb.WriteConcern;
 @Configuration
 @EnableMongoRepositories("com.idrene.emefana.repositories")
 public class MongoRepositoryConfig extends AbstractMongoConfiguration {
-	private static final String PROPERTY_NAME_DATABASE_PASSWORD = "password";
-	private static final String PROPERTY_NAME_DATABASE_PORT = "port";
-	private static final String PROPERTY_NAME_DATABASE_USERNAME = "user";
-	private static final String PROPERTY_NAME_DATABASE_HOST = "serverName";
-	private static final String PROPERTY_NAME_DATABASE_NAME = "databaseName";
+	@Value("${db.password}")
+	private String password;
+	@Value("${db.host.port}")
+	private int port;
+	@Value("${db.user}")
+	private String dbuser;
+	@Value("${db.host.name}")
+	private String host;
+	@Value("${db.name}")
+	private String dbname;
 
 	@Resource
 	private Environment environment;
 
 	@Override
 	public Mongo mongo() throws Exception {
-		ServerAddress serverAdress = new ServerAddress(
-				environment.getProperty(PROPERTY_NAME_DATABASE_HOST),
-				Integer.valueOf(environment
-						.getProperty(PROPERTY_NAME_DATABASE_PORT)));
+		ServerAddress serverAdress = new ServerAddress(host,port);
 		Mongo mongo = new MongoClient(serverAdress);
 		mongo.setWriteConcern(WriteConcern.ACKNOWLEDGED);
 		return mongo;
@@ -51,13 +54,13 @@ public class MongoRepositoryConfig extends AbstractMongoConfiguration {
 
 	@Override
 	protected String getDatabaseName() {
-		return environment.getProperty(PROPERTY_NAME_DATABASE_NAME);
+		return dbname;
 	}
-	
-	 @Bean
-	  public GridFsTemplate gridFsTemplate() throws Exception {
-	    return new GridFsTemplate(mongoDbFactory(), mappingMongoConverter());
-	  }
+
+	@Bean
+	public GridFsTemplate gridFsTemplate() throws Exception {
+		return new GridFsTemplate(mongoDbFactory(), mappingMongoConverter());
+	}
 
 	// void replicaLSet() throws UnknownHostException {
 	// MongoCredential credential =
