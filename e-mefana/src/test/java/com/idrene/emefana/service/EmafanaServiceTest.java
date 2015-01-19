@@ -79,7 +79,7 @@ public class EmafanaServiceTest extends AbstractIntegrationTest{
 		criteria.setPriceFrom(600000.0);
 		criteria.setPriceTo(1000000.0);
 		criteria.setCapacityFrom(150);
-		//criteria.setProviderType("Venues");
+		criteria.setProviderType("Venues");
 		Optional<GeoResults<Provider>> geoResults = service
 				.searchProvidersByCriteria(criteria);
 		assertNotNull(geoResults);

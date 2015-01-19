@@ -44,7 +44,7 @@ public class Provider {
 	@Getter @Setter private double[] location;
 	
 	@DBRef
-	@Getter @Setter private List<ProviderType> categories = new ArrayList<>();
+	@Getter @Setter private Set<ProviderType> categories = new HashSet<>();
 	
 	@Getter @Setter private int capacity;
 	
