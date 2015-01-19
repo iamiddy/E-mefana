@@ -32,6 +32,7 @@ import org.springframework.data.geo.Point;
 import org.springframework.util.CollectionUtils;
 
 import com.idrene.emefana.AbstractIntegrationTest;
+import com.idrene.emefana.domain.Address;
 import com.idrene.emefana.domain.Booking;
 import com.idrene.emefana.domain.BookingStatus;
 import com.idrene.emefana.domain.BookingStatus.BOOKINGSTATE;
@@ -279,6 +280,15 @@ public class RepositoriesTest extends AbstractIntegrationTest {
 		updateProvidersLambda(prvs,
 				provider -> provider.getPrice() == null,
 				provider -> provider.setPrice(new Price(price(),null)));
+	}
+	
+	@Test
+	public void updateCity(){
+		List<Provider> prvs = providerRepository.findAll();
+		City city = cityRepository.findByCidIgnoreCase("Dar es Salaam");
+		updateProvidersLambda(prvs,
+				provider -> provider.getAddress() == null,
+				provider -> provider.setAddress(new Address("",city)));
 	}
 	
 	@Test

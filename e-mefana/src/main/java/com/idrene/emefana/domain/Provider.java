@@ -3,6 +3,7 @@
  */
 package com.idrene.emefana.domain;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -43,11 +44,13 @@ public class Provider {
 	@Getter @Setter private double[] location;
 	
 	@DBRef
-	@Getter @Setter private Set<ProviderType> categories = new HashSet<>();
+	@Getter @Setter private List<ProviderType> categories = new ArrayList<>();
 	
 	@Getter @Setter private int capacity;
 	
 	@Getter @Setter private Price price;
+	
+	@Getter @Setter private String code;
 	
 	@Getter @Setter private Address address;
 	

@@ -3,7 +3,7 @@
  */
 package com.idrene.emefana.domain;
 
-import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Optional;
 import java.util.OptionalInt;
@@ -14,6 +14,8 @@ import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Pageable;
 
+import com.idrene.emefana.util.DateConvertUtil;
+
 /**
  * @author iddymagohe
  *
@@ -22,37 +24,38 @@ public class SearchCriteria {
 	@Getter @Setter private Date fromDate;
 	@Getter @Setter private Date toDate;
 	@Getter @Setter private double[] nearLocation;
-	@Getter @Setter private BigDecimal priceFrom;
-	@Getter @Setter private BigDecimal priceTo;
-	@Getter @Setter private City city;
+	@Getter @Setter private Double priceFrom;
+	@Getter @Setter private Double priceTo;
+	@Getter @Setter private String city;
 	@Getter @Setter private int capacityFrom;
 	@Getter @Setter private int capacityTo;
-	@Getter @Setter private String[] features;
+	@Getter @Setter private String[] features; 
 	@Getter @Setter private String[] services;
-	@Getter @Setter private String providerType;
+	@Getter @Setter private String providerType;//category
 	@Setter @Getter private Pageable page;
+	@Setter @Getter private int maxDistance = 15;
 	
-	public Optional<Date> getOFromDate(){
-		return Optional.ofNullable(fromDate);
+	public Optional<LocalDate> getOFromDate(){
+		return Optional.ofNullable(DateConvertUtil.asLocalDate(fromDate));
 	}
 	
-	public Optional<Date> getOToDate(){
-		return Optional.ofNullable(toDate);
+	public Optional<LocalDate> getOToDate(){
+		return Optional.ofNullable(DateConvertUtil.asLocalDate(toDate));
 	}
 	
 	public Optional<double[]> getONearLocation(){
 		return Optional.ofNullable(nearLocation);
 	}
 	
-	public Optional<BigDecimal> getOpriceFrom(){
+	public Optional<Double> getOpriceFrom(){
 		return Optional.ofNullable(priceFrom);
 	}
 	
-	public Optional<BigDecimal> getOpriceTo(){
+	public Optional<Double> getOpriceTo(){
 		return Optional.ofNullable(priceTo);
 	}
 	
-	public Optional<City> getOCity(){
+	public Optional<String> getOCity(){
 		return Optional.ofNullable(city);
 	}
 	

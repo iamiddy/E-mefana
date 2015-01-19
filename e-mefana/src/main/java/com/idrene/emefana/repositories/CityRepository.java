@@ -13,8 +13,7 @@ import com.idrene.emefana.domain.City;
  *
  */
 
- @RepositoryRestResource(collectionResourceRel = "cities", path = "cities")
- public interface CityRepository extends MongoRepository<City, String>{
- 
-	 
+@RepositoryRestResource(collectionResourceRel = "cities", path = "cities")
+public interface CityRepository extends MongoRepository<City, String> {
+	City findByCidIgnoreCase(String city);
 }

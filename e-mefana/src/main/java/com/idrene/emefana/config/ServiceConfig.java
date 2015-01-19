@@ -3,8 +3,9 @@
  */
 package com.idrene.emefana.config;
 
+import org.jasypt.util.password.BasicPasswordEncryptor;
+import org.jasypt.util.password.PasswordEncryptor;
 import org.jasypt.util.text.BasicTextEncryptor;
-import org.jasypt.util.text.StrongTextEncryptor;
 import org.jasypt.util.text.TextEncryptor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
@@ -22,7 +23,7 @@ import com.idrene.emefana.util.UtilityBean;
  * 
  */
 @Configuration
-@ComponentScan(basePackages={"com.idrene.emefana.domain","com.idrene.emefana.repositories"})
+@ComponentScan(basePackages={"com.idrene.emefana.domain","com.idrene.emefana.repositories","com.idrene.emefana.service"})
 @PropertySource(value = { "classpath:application.properties" })
 public class ServiceConfig {
 	
@@ -66,5 +67,10 @@ public class ServiceConfig {
 		BasicTextEncryptor encrpt = new BasicTextEncryptor();
 		encrpt.setPassword(app_encrypt);
 		return encrpt;
+	}
+	
+	@Bean
+	public PasswordEncryptor passwordEncryptor(){
+		return new BasicPasswordEncryptor();
 	}
 }

@@ -45,6 +45,13 @@ public class Booking {
 	@Getter @Setter BookingStatus status;
 	
 	@Getter @Setter private List<BookingService> services = new LinkedList<>();
+
+	@Override
+	public String toString() {
+		return "Booking [bid=" + bid + ", customer=" + customer + ", provider="
+				+ provider + ", event=" + event + ", startDate=" + startDate
+				+ ", endDate=" + endDate + ", status=" + status + "]";
+	}
 	
 	
 }

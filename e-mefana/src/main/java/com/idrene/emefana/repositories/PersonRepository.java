@@ -20,6 +20,6 @@ import com.idrene.emefana.domain.User;
 public interface PersonRepository extends MongoRepository<User, String> ,QueryDslPredicateExecutor<User>{
 	List<User> findByLastName(@Param("name") String name);
 	List<User> findByFirstNameLike(@Param("name") String name);
-	User findByIdOrEmailAddress(String userId, String email);
+	User findByIdOrEmailAddressAllIgnoreCase(String userId, String email);
 
 }

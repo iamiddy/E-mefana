@@ -7,8 +7,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 /**
  * @author iddymagohe
@@ -18,12 +20,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @TypeAlias("provider_type")
 public class ProviderType {
 	
+	
 	@Id
 	@Getter @Setter private String type;
 
 	/**
 	 * @param type
 	 */
+	@PersistenceConstructor
 	public ProviderType(String type) {
 		this.type = type;
 	}
@@ -64,6 +68,11 @@ public class ProviderType {
 		} else if (!type.equalsIgnoreCase(other.type))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return  type ;
 	}
 	
 	

@@ -37,16 +37,23 @@ public class User {
 	
 	@Setter @Getter String password;
 
+	
+	
 	/**
 	 * @param id
-	 * @param firstName
-	 * @param lastName
+	 * @param emailAddress
+	 * @param password
 	 */
-	public User(String id, String firstName, String lastName) {
+	public User(String id, String emailAddress, String password) {
 		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
+		this.emailAddress = emailAddress;
+		this.password = password;
 	}
+	
+	public User(){
+		
+	}
+
 
 	@Override
 	public String toString() {

@@ -20,11 +20,13 @@ import com.idrene.emefana.domain.Provider;
  * @author iddymagohe
  *
  */
-public interface ProviderRepository extends MongoRepository<Provider,String>,QueryDslPredicateExecutor<Provider>{
+public interface ProviderRepository extends MongoRepository<Provider,String>,ProviderRepositoryCustom,QueryDslPredicateExecutor<Provider>{
 	
 	Page<Provider> findByAddressCityOrderByNameAsc(City city, Pageable pegiable);
 	
 	Page<Provider> findByAddressCityOrderByScoreDesc(City city,TextCriteria criteria, Pageable pageable);
 	
 	GeoResults<Provider> findByLocationNearAndNameIgnoreCase(Point location, Distance distance,String name);
+
+	Provider  findByNameIgnoreCase(String name);
 }

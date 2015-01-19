@@ -8,6 +8,8 @@ import lombok.Setter;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.mongodb.core.index.GeoSpatialIndexType;
+import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -29,6 +31,9 @@ public class City {
 	@Field("country")
 	@Indexed
 	@Getter @Setter private String country;
+	
+	@GeoSpatialIndexed(type=GeoSpatialIndexType.GEO_2DSPHERE)
+	@Getter @Setter private double[] location;
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
