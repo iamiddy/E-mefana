@@ -16,6 +16,7 @@ public class RestExporterWebInitializer implements WebApplicationInitializer {
 	    // Bootstrap repositories in root application context
 	   AnnotationConfigWebApplicationContext rootCtx = new AnnotationConfigWebApplicationContext();
 	   rootCtx.register(ServiceConfig.class);
+	   //rootCtx.register(SecurityConfig.class);
 	   rootCtx.register(MongoRepositoryConfig.class); // Include JPA entities, Repositories
 	  
 	   servletContext.addListener(new ContextLoaderListener(rootCtx));

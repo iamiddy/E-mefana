@@ -58,14 +58,9 @@ class ProviderRepositoryImpl implements ProviderRepositoryCustom{
 		searchCriteria.getOCapacityFrom().ifPresent( // Minimum capacity
 				capacity -> criteria.and("capacity").gte(capacity));
 		
-//		searchCriteria.getOCapacityTo().ifPresent( // Maximum capacity
-//				capacity -> criteria.and("capacity").lte(capacity));
-		
 		searchCriteria.getOpriceFrom().ifPresent( // Minimum price
 				minPrice -> criteria.and("price.price").gte(minPrice));
-		
-//		searchCriteria.getOpriceTo().ifPresent( // Maximum price --- Java Filter
-//				maxPrice -> criteria.and("price.price").lte(maxPrice));
+
 		searchCriteria.getOCity().ifPresent(
 				city -> criteria.and("address.city.$id").is(city));
 		

@@ -5,7 +5,7 @@ package com.idrene.emefana.service;
 
 /**
  * @author iddymagohe
- *
+ * @since 1.0
  */
 public class EntityExists extends Exception {
 
@@ -17,7 +17,5 @@ public class EntityExists extends Exception {
 	public EntityExists(String message) {
 		super(message);
 	}
-	
-	
 
 }

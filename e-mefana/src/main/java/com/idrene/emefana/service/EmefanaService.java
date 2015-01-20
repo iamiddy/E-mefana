@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.geo.GeoResults;
 import org.springframework.stereotype.Service;
@@ -34,7 +33,7 @@ import com.mysema.query.BooleanBuilder;
 
 /**
  * @author iddymagohe
- *
+ * @since 1.0
  */
 public interface EmefanaService {
 
@@ -148,7 +147,6 @@ class EmefanaServiceImpl implements EmefanaService {
 	}
 	
 	private List<String> bookingsByDates(SearchCriteria criteria){
-		
 		final QBooking qbooking = QBooking.booking;
 		BooleanBuilder bookingCriteria = new BooleanBuilder();
 		criteria.getOFromDate()
@@ -168,5 +166,6 @@ class EmefanaServiceImpl implements EmefanaService {
 		bookedProviders.forEach(booking -> providerIds.add(booking.getProvider().getPid()));
 		return providerIds;
 	}
+	
 
 }

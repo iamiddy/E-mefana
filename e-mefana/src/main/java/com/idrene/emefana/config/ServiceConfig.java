@@ -20,10 +20,13 @@ import com.idrene.emefana.util.UtilityBean;
 
 /**
  * @author iddymagohe
+ * @since 1.0
  * 
  */
 @Configuration
-@ComponentScan(basePackages={"com.idrene.emefana.domain","com.idrene.emefana.repositories","com.idrene.emefana.service"})
+@ComponentScan(basePackages = {"com.idrene.emefana.domain",
+		"com.idrene.emefana.repositories", "com.idrene.emefana.service",
+		"com.idrene.emefana.security" })
 @PropertySource(value = { "classpath:application.properties" })
 public class ServiceConfig {
 	

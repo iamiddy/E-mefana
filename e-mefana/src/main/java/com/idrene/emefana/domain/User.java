@@ -14,6 +14,8 @@ import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * @author iddymagohe
  *
@@ -35,6 +37,7 @@ public class User {
 	@Indexed
 	@Getter @Setter String associatedProvider;
 	
+	@JsonIgnore
 	@Setter @Getter String password;
 
 	
@@ -61,14 +64,17 @@ public class User {
 				+ lastName + "]";
 	}
 	
+	@JsonIgnore
 	public Optional<String> getOAssociatedProvider(){
 		return Optional.ofNullable(StringUtils.trimToNull(associatedProvider));
 	}
 	
+	@JsonIgnore
 	public Optional<String> getOemailAddress(){
 		return Optional.ofNullable(emailAddress);
 	}
 	
+	@JsonIgnore
 	public Optional<String> getOuserId(){
 		return Optional.ofNullable(id);
 	}
