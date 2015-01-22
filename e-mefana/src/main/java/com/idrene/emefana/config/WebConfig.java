@@ -32,7 +32,7 @@ import com.mangofactory.swagger.plugin.EnableSwagger;
 @EnableSwagger
 @EnableSpringDataWebSupport
 @EnableMongoRepositories("com.idrene.emafana.repositories")
-@ComponentScan(basePackages = {"com.idrene.emefana.config","com.idrene.emefana.rest.controllers"})
+@ComponentScan(basePackages = {"com.idrene.emefana.config","com.idrene.emefana.rest.controllers","com.idrene.emefana.rest.tokens"})
 public class WebConfig extends WebMvcConfigurerAdapter {
 	
 

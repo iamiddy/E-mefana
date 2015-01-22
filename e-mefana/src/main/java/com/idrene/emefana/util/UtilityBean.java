@@ -14,9 +14,9 @@ import java.util.stream.StreamSupport;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.jasypt.util.password.PasswordEncryptor;
 import org.jasypt.util.text.TextEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * @author iddymagohe
@@ -28,7 +28,7 @@ public class UtilityBean {
 	TextEncryptor textEncrptor;
 	
 	@Autowired
-	PasswordEncryptor passwordEncrptor;
+	PasswordEncoder passwordEncrptor;
 
 	public String encodePropertyValue(String filedValue) {
 		return StringUtils.trimToNull(filedValue) == null ? filedValue
@@ -41,11 +41,7 @@ public class UtilityBean {
 	}
 	
 	public String encryptPassword(String password){
-		return passwordEncrptor.encryptPassword(password);
-	}
-	
-	public boolean checkPassword(String plainPassword, String encryptedPassword){
-		return passwordEncrptor.checkPassword(plainPassword, encryptedPassword);
+		return passwordEncrptor.encode(password);
 	}
 	
 	public static String generateProviderId(){
