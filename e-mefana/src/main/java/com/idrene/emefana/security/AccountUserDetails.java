@@ -5,8 +5,11 @@ package com.idrene.emefana.security;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.idrene.emefana.domain.User;
@@ -28,18 +31,8 @@ public class AccountUserDetails implements UserDetails{
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		GrantedAuthority authority = new GrantedAuthority() {
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public String getAuthority() {
-				return "USER";
-			}
-		};
-
-		ArrayList<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-		authorities.add(authority);
-		return authorities;
+		return account.getRoles().stream().map(String::valueOf)
+				.map(SimpleGrantedAuthority::new).collect(Collectors.toList());
 	}
 
 	@Override

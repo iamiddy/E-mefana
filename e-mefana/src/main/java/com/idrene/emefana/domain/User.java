@@ -3,7 +3,10 @@
  */
 package com.idrene.emefana.domain;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,8 +16,10 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.util.Assert;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.idrene.emefana.security.EMEFANA_ROLES;
 
 /**
  * @author iddymagohe
@@ -39,6 +44,9 @@ public class User {
 	
 	@JsonIgnore
 	@Setter @Getter String password;
+	
+	@JsonIgnore
+	@Getter @Setter Set<EMEFANA_ROLES> roles = new HashSet<>();
 
 	
 	
@@ -79,5 +87,11 @@ public class User {
 		return Optional.ofNullable(id);
 	}
 	
-	
+	/**
+	 * @param userRoles
+	 */
+	public void addRoles(EMEFANA_ROLES ... userRoles){
+		Assert.notNull(userRoles, "Role must not be null");
+		Arrays.stream(userRoles).forEach(roles::add);
+	}
 }

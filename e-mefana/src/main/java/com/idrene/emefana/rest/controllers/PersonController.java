@@ -13,6 +13,7 @@ import org.springframework.hateoas.Resources;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,6 +24,7 @@ import com.wordnik.swagger.annotations.Api;
 
 @Controller
 @Api(value="folks", description="Operations on Businesses", position = 2)
+@PreAuthorize("hasRole('USER')")
 class PersonController {
 
 	@Autowired

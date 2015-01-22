@@ -26,6 +26,7 @@ import com.idrene.emefana.repositories.PersonRepository;
 import com.idrene.emefana.repositories.ProviderRepository;
 import com.idrene.emefana.repositories.ProviderTypeRepository;
 import com.idrene.emefana.repositories.ServiceOfferingRepository;
+import com.idrene.emefana.security.EMEFANA_ROLES;
 import com.idrene.emefana.util.DateConvertUtil;
 import com.idrene.emefana.util.UtilityBean;
 import com.mysema.query.BooleanBuilder;
@@ -131,6 +132,7 @@ class EmefanaServiceImpl implements EmefanaService {
 		Optional<User> dbUser=Optional.ofNullable(userRepository.findByIdOrEmailAddressAllIgnoreCase(user.getId(), user.getEmailAddress()));
 		if(dbUser.isPresent()) throw new EntityExists(user + " exists");
 		user.setPassword(utilityBean.encryptPassword(user.getPassword()));
+		user.addRoles(EMEFANA_ROLES.USER);
 		dbUser = Optional.of(userRepository.save(user));
 		return dbUser;
 	}

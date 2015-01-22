@@ -20,6 +20,7 @@ import com.idrene.emefana.domain.Provider;
 import com.idrene.emefana.domain.SearchCriteria;
 import com.idrene.emefana.domain.User;
 import com.idrene.emefana.repositories.PersonRepository;
+import com.idrene.emefana.security.EMEFANA_ROLES;
 import com.idrene.emefana.util.UtilityBean;
 
 /**
@@ -54,7 +55,7 @@ public class EmafanaServiceTest extends AbstractIntegrationTest{
 		
 	}
 	
-	@Test
+	//@Test
 	public void retrieveBookingsByUserTest(){
 		Optional<List<Booking>> bookings= service.retriveUserBookings(service.findUser(new User("IDRENE",null,null)).get());
 	    bookings.ifPresent(booking -> booking.forEach(System.out::println));
