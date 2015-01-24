@@ -20,7 +20,6 @@ import com.idrene.emefana.domain.Provider;
 import com.idrene.emefana.domain.SearchCriteria;
 import com.idrene.emefana.domain.User;
 import com.idrene.emefana.repositories.PersonRepository;
-import com.idrene.emefana.security.EMEFANA_ROLES;
 import com.idrene.emefana.util.UtilityBean;
 
 /**

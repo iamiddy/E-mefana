@@ -143,7 +143,7 @@ class EmefanaServiceImpl implements EmefanaService {
 		Optional<Provider> dbProvider = Optional.ofNullable(providerRepository.findByNameIgnoreCase(provider.getName()));
 		if(dbProvider.isPresent()) throw new EntityExists(provider.getName() + " exists");
 		provider.setPid(UtilityBean.generateProviderId());
-		provider.setCode(UtilityBean.generateProiderCode(provider.getPid()));
+		provider.setCode(UtilityBean.generateProviderCode(provider.getPid()));
 		dbProvider = Optional.of(providerRepository.save(provider));
 		return  dbProvider;
 	}

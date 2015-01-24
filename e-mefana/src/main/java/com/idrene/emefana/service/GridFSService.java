@@ -29,7 +29,7 @@ class GridFsClient implements GridFSService{
 	 
 //	  public void storeFileToGridFs {
 //
-    FileMetadata metadata = new FileMetadata();
+    //FileMetadata metadata = new FileMetadata();
 //	    // populate metadata
 //	   // Resource file = … // lookup File or Resource
 //
