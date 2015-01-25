@@ -48,6 +48,7 @@ public interface EmefanaService {
 
 	public Optional<User> registerUser(User user) throws EntityExists;
 	public Optional<Provider> registerProvider(Provider provider) throws EntityExists;
+	//TODO add , retrieval and associated file contents to providers via #{@link #GridFsService}
 
 }
 

@@ -16,6 +16,8 @@ Res * Copyright 2012-2013 the original author or authors.
 package com.idrene.emefana;
 
 import org.junit.runner.RunWith;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,5 +34,6 @@ import com.idrene.emefana.config.ServiceConfig;
 @ContextConfiguration(classes = {ServiceConfig.class, MongoRepositoryConfig.class})
 @Transactional
 public abstract class AbstractIntegrationTest {
+	protected static final Resource resource = new ClassPathResource("sundeck.jpg");
 
 }

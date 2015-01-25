@@ -74,18 +74,17 @@ public class UtilityBean {
 				Collectors.toList());
 	}
 
-	public static Optional<String> InputStreamToBase64(Optional<InputStream> inputStream) throws IOException{
+	public static Optional<String> InputStreamToBase64(Optional<InputStream> inputStream, String ext) throws IOException{
 		if (inputStream.isPresent()) {
 			ByteArrayOutputStream output = new ByteArrayOutputStream();
 			FileCopyUtils.copy(inputStream.get(), output);
-			//TODO retrieve content type from file, & replace jpg below with it
-			return Optional.ofNullable("data:image/png;base64," + DatatypeConverter.printBase64Binary(output.toByteArray()));
+			return Optional.ofNullable("data:image/"+ext+";base64," + DatatypeConverter.printBase64Binary(output.toByteArray()));
 		}
 
 		return Optional.empty();
 	}
 	
-	public static Optional<InputStream> Base64InputStream(Optional<String> base64String)throws IOException {
+	public static Optional<InputStream> Base64ToInputStream(Optional<String> base64String)throws IOException {
 		if (base64String.isPresent()) {
 			return Optional.ofNullable(new ByteArrayInputStream(DatatypeConverter.parseBase64Binary(base64String.get())));
 		}

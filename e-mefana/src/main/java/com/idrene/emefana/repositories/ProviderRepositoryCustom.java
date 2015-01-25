@@ -86,4 +86,6 @@ class ProviderRepositoryImpl implements ProviderRepositoryCustom{
 		return mongoOperations.geoNear(near, Provider.class);
 	}
 	
+	
+
 }
