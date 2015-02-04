@@ -21,5 +21,6 @@ public interface PersonRepository extends MongoRepository<User, String> ,QueryDs
 	List<User> findByLastName(@Param("name") String name);
 	List<User> findByFirstNameLike(@Param("name") String name);
 	User findByIdOrEmailAddressAllIgnoreCase(String userId, String email);
+	User findByEmailAddressAllIgnoreCase(String email);
 
 }

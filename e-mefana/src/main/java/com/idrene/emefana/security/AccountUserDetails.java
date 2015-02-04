@@ -42,7 +42,7 @@ public class AccountUserDetails implements UserDetails{
 
 	@Override
 	public String getUsername() {
-		return account.getOuserId().isPresent()?account.getId():account.getEmailAddress();
+		return account.getEmailAddress();
 	}
 
 	@Override
