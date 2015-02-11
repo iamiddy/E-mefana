@@ -1,0 +1,102 @@
+<div id="shop">
+
+
+				<section class="container">
+
+					<div class="row">
+
+						<!-- LOGIN -->
+						<div class="col-md-6">
+
+							<h2>Sign <strong>In</strong></h2>
+
+							<form name="loginform" class="white-row" novalidate="novalidate">
+
+								<!-- alert failed -->
+								<div class="alert alert-danger" ng-show="loginerror">
+									<i class="fa fa-frown-o"></i> 
+									Wrong <strong>E-mail Address</strong> or <strong>Password</strong>!
+								</div>
+
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label>E-mail Address</label>
+											<input type="text" ng-model="username" class="form-control">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label>Password</label>
+											<input type="password" ng-model="password" class="form-control">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<span class="remember-box checkbox">
+											<label for="rememberme">
+												<input type="checkbox" id="rememberme" ng-model="rememberme">Remember Me
+											</label>
+										</span>
+									</div>
+									<div class="col-md-6">
+										<input type="submit" value="Sign In" class="btn btn-primary pull-right" data-loading-text="Loading...">
+									</div>
+								</div>
+
+							</form>
+
+						</div>
+						<!-- /LOGIN -->
+
+						<!-- PASSWORD -->
+						<div class="col-md-6">
+
+							<h2>Forgot <strong>Password</strong>?</h2>
+
+							<div class="white-row">
+
+								<p>
+									Lid est laborum dolo rumes fugats untras. Etharums ser quidem rerum facilis dolores nemis omnis fugats vitaes nemo.
+								</p>
+
+								<!-- alert success -->
+								<div class="alert alert-success">
+									<i class="fa fa-check-circle"></i> 
+									<strong>New Password Sent!</strong> Check your E-mail Address!
+								</div>
+
+								<!-- alert failed -->
+								<div class="alert alert-danger">
+									<i class="fa fa-frown-o"></i> 
+									<strong>E-mail Address</strong> not found!
+								</div>
+
+								<!-- password form -->
+								<label>Type your E-mail Address</label>
+								<form class="input-group" name="loginform">
+									<input type="text" class="form-control" ng-model="emailaddress" id="s" value="" placeholder="E-mail Address" />
+									<span class="input-group-btn">
+										<button class="btn btn-primary">SEND</button>
+									</span>
+								</form>
+
+							</div>
+
+						</div>
+						<!-- /PASSWORD -->
+
+					</div>
+
+
+					<p class="white-row">
+						Don't have an account yet? <a href="page-signup.html">Click to create one</a>, it's free!
+					</p>
+
+				</section>
+
+			</div>
+		

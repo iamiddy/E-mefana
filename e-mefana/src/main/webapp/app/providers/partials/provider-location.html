@@ -1,0 +1,108 @@
+<div class="panel panel-warning"">
+     <div class="panel-heading"><h5>BUSINESS PHYSICAL ADDRESS INFORMATION</h5></div>
+			  <div class="panel-body">
+								
+							<div class="row">
+								    <div class="form-group">
+								     <div class="col-md-12 "  >
+									   <label>
+										<input type="checkbox" data-for="use-location"  ng-model="provider.uselocation" ng-click="loadmap()"/>
+										Use my current location as the <strong>{{provider.name }}</strong> official business location 
+									 </label>
+					               </div>
+								    <div class="col-md-6">
+											<label>Country</label>
+											<select class="form-control pointer" ng-model="provider.country"  >
+												<option value="">Select a country</option>
+												<option value="TZ">Tanzania</option>
+											</select>
+										</div>
+										
+										<div class="col-md-6">
+											<label>City</label>
+											<input type="text" value="" class="form-control" ng-model="provider.city"  />
+										</div>
+									</div>
+									
+									<div class="form-group">
+									<div class="col-md-6">
+											<label>Street address</label>
+											<input type="text" ng-model="provider.streetaddress"  class="form-control" placeholder="example: 123 Main Street" />
+									</div>
+									<div class="col-md-6">
+											<label>Additional address information</label>
+											<input type="text" value="" class="form-control" ng-model="provider.additionalstreetaddress"  placeholder="Suite number, intersection, plaza, square" />
+									</div>
+									</div>
+									
+								</div>
+					       	
+								<div class="row">
+									<div class="form-group">
+										<div class="col-md-6">
+											<label>Phone Number </label>
+											<input type="text" ng-model="provider.phonenumber"  class="form-control" />
+										</div>
+										<div class="col-md-6">
+											<label>Email Address </label>
+											<input type="text" ng-model="provider.emailaddress"  class="form-control" />
+										</div>
+									</div>
+								</div>
+								
+								<div class="row">
+									<div class="form-group">
+										<div class="col-md-6">
+											<label>Website </label>
+											<input type="text" ng-model="provider.website"  class="form-control" />
+										</div>
+										<div class="col-md-6">
+											<label>Facebook page </label>
+											<input type="text" ng-model="provider.facebook"  class="form-control" />
+										</div>
+									</div>
+								</div>
+					</div>
+				</div>	
+		  <div class="panel panel-warning"" ng-show="hasVenue()">
+           <div class="panel-heading"><h5>VENUE FEATURES</h5></div>
+			  <div class="panel-body">
+			   <p>If you have additional Venue space, list them here  </p>
+						<div class="row" >
+						 <div class="form-group" >
+							<div class="col-md-3" ng-repeat-start="venue in provider.venues">
+									<label>Name</label>
+									<input type="text" class="form-control" ng-model="venue.name"/>
+							</div>
+							<div class="col-md-2">
+									<label>Max Capacity</label>
+									<input type="text"  class="form-control" ng-model="venue.capacity"/>
+							</div>
+							   <div class="col-md-3" >
+									<label>Price</label>
+									<input type="text" class="form-control" ng-model="venue.price" />
+								</div>
+								<div class="col-md-2" >
+								<label>Currency</label>
+											<select class="form-control pointer" ng-model="venue.currency"  >
+												<option value="TZS">TZS</option>
+												<option value="USD">USD</option>
+											</select>
+									</div>
+							
+							<div class="col-md-2" ng-repeat-end>
+							       <label>{{$index + 1}}</label>
+									<button type="button" class="btn  btn-xs form-control"  ng-click="removeVenue($index)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+							</div>
+						 </div>
+						   
+						</div> 
+							<button type="button" class="btn btn-xs" ng-click="addVenue()"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Venue Space</button>
+					
+			  </div>
+			</div>	
+			
+						
+		     <button class="btn btn-primary btn-sm" type="submit" ui-sref="register.start" ><i class="fa fa-left"></i> &nbsp; Previous</button>
+
+			  <button class="btn btn-primary btn-sm" type="submit" ui-sref="register.features" ><i class="fa fa-right"></i> &nbsp; Next</button>

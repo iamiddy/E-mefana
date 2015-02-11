@@ -1,0 +1,62 @@
+<div class="panel panel-warning"">
+     <div class="panel-heading"><h5>TYPES OF EVENTS THAT THIS BUSINESS CAN CATER TO</h5></div>
+	 <div class="panel-body">
+		<div class="row">
+		<div class="col-md-6 " ng-repeat="event in events">
+			<div class="checkbox">
+			  <label>
+			    <input type="checkbox" checklist-model="provider.events" checklist-value="event">
+			      {{event}}
+			  </label>
+			</div>
+			</div>
+			<p>&nbsp;</p>
+			<p>
+			  <button type="button" class="btn btn-warning  btn-xs" ng-click="checkAll('E')"><i class="fa fa-check"></i>Check all Events</button>
+			  <button type="button" class="btn btn-default btn-xs" ng-click="uncheckAll('E')"><i class="fa fa-times"></i>Uncheck all</button>
+			</p>
+		</div>
+	</div>
+</div>	
+ <div class="panel panel-warning"">
+     <div class="panel-heading"><h5>BUSINESS SERVICE OFFERING </h5></div>
+			  <div class="panel-body">
+								<p>Does <strong>{{provider.name}}</strong> offer any of the following?, tick all that apply</p>
+				<div class="row">
+				  <ul class="list-group">
+				   <div class="col-md-6 ">
+					<li class="list-group-item" ng-repeat="service in services" ng-if="$odd">
+						<div class="checkbox">
+							<label> <input type="checkbox" checklist-model="provider.services" checklist-value="service"> {{service}}</label>
+						</div>
+					</li>
+				  </div>
+				  <div class="col-md-6 ">
+				  <li class="list-group-item" ng-repeat="service in services" ng-if="$even">
+						<div class="checkbox">
+							<label> <input type="checkbox" checklist-model="provider.services" checklist-value="service"> {{service}}</label>
+						</div>
+					</li>
+				 </div>
+						</ul>
+						<p>&nbsp;</p>
+			<p>
+				<button type="button" class="btn btn-warning btn-xs"ng-click="checkAll('S')"><i class="fa fa-check"></i>Check all Services</button>
+				<button type="button" class="btn btn-default btn-xs" ng-click="uncheckAll('S')"><i class="fa fa-times"></i>Uncheck all</button>
+			</p>
+		 </div>
+		 
+		</div>
+		</div>	
+<!-- AGREE -->
+				<div class="row">
+					<div class="col-md-12">
+						<label class="pointer shop-cart-agree">
+							<input type="checkbox" name="agree" value="1" /> I understand and agree the <a href="page-terms-and-conditions.html" target="_blank">terms and conditions</a>.
+						</label>
+					</div>
+				</div>
+				<!-- /AGREE -->		
+		     <button class="btn btn-primary btn-sm" type="submit" ui-sref="register.features" ><i class="fa fa-left"></i> &nbsp; Previous</button>
+
+			  <button class="btn btn-primary btn-sm" type="submit"  ><i class="fa fa-right"></i> &nbsp; Complete this Registration</button>

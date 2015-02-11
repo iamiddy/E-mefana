@@ -1,0 +1,53 @@
+       <div class="col-md-4">
+
+							<h2>Why to register?</h2>
+
+							<div class="white-row">
+
+								<h4>Registration is fast, easy, and free.</h4>
+
+								<p>Once you're registered, you can:</p>
+								<ul class="list-icon check">
+									<li>Buy, sell, and interact with other members.</li>
+									<li>Save your favorite searches and get notified.</li>
+									<li>Watch the status of up to 200 items.</li>
+									<li>View your Atropos information from any computer in the world.</li>
+									<li>Connect with the Atropos community.</li>
+								</ul>
+							</div>
+
+							<div class="white-row">
+							   
+								<h4>Contact Customer Support</h4>
+								<p>
+                                   This page is for adding new listings. To update or manage an existing listing, please visit the<br/>
+									<a href="page-signin.html">E-mefana Control Center</a>
+								</p>
+								<hr class="half-margins" />
+								<p>
+									If you're looking for more help or have a question to ask, please <a href="contact-us.html">contact us</a>.
+								</p>
+							</div>
+							
+							<div  ng-if="provider.uselocation">
+
+						<div class="white-row">
+						  	<h5>BUSINESS LOCATION</h5>
+							<div id="gmaps"><!-- google map -->
+							   <img alt="" ng-src="http://maps.googleapis.com/maps/api/staticmap?center={{$geolocation.position.coords.latitude}},{{$geolocation.position.coords.longitude}}&zoom=13&size=320x200&sensor=true&markers=label:E%7C{{$geolocation.position.coords.latitude}},{{$geolocation.position.coords.longitude}}"/>
+							</div>
+
+							<div class="divider white half-margins"><!-- divider -->
+								<i class="fa fa-star"></i>
+							</div>
+
+							<p class="nomargin-bottom">
+								<span class="block"><strong><i class="fa fa-map-marker"></i> Address:</strong> {{provider.streetaddress}}, {{provider.city}}, {{provider.country}}</span>
+								<span class="block"><strong><i class="fa fa-phone"></i> Phone:</strong> {{provider.phonenumber}}</span>
+								<span class="block"><strong><i class="fa fa-envelope"></i> Email:</strong> <a href="mailto:mail@yourdomain.com">{{provider.emailaddress}}</a></span>
+							</p>
+
+						</div>
+
+				</div>
+			</div>
