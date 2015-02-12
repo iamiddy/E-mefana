@@ -4,6 +4,7 @@
 
 	  providerControllers.controller('RegisterController',
 			  ['$scope','$rootScope', '$geolocation',function($scope,$rootScope,$geolocation) {
+			 
 				  
 			 $scope.events = [
 				                  'guest Events 1', 
@@ -17,6 +18,24 @@
 				                  'customer services 3', 
 				                  'admin services 4'
 				                ];
+			 $scope.features = [
+				                 {
+				                	 name : 'Description lists',
+				                	 description :[
+				                	               'description list is perfect for defining terms',
+				                	               'Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.',
+				                	               ' Donec id elit non mi porta gravida at eget metus'
+				                	              ]
+				                 },
+				                 {
+				                	 name : 'Malesuada porta',
+				                	 description :[
+				                	               'Etiam porta sem malesuada magna mollis euismod',
+				                	               'Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh' ,
+				                	               ' ut fermentum massa justo sit amet risus',
+				                	              ]
+				                 },
+				                ];
 			 
 			  $scope.provider = {
 					  venues : [ {name:'',capacity:'',price:''}],
@@ -24,6 +43,10 @@
 					  services : [ ],
 					  events : [ ],
 			  };
+			  
+
+			  
+			  //general information
 			  $scope.provider.uselocation = false;
 			  
 			  $scope.loadmap = function(){
@@ -49,6 +72,7 @@
 				 $scope.provider.venues.splice(index, 1);
 			 };
 			 
+			 // services
 			 $scope.checkAll = function(type) {
 				 if(type == "E"){
 					 $scope.provider.events = angular.copy($scope.events);
@@ -70,6 +94,29 @@
 			    
 			    
 			  };
+			  
+			  //Features
+			  $scope.provider.feature='';
+			  
+			 $scope.addFeature = function(){
+				 $scope.features.push({name :$scope.provider.feature,description:[ ] });
+				 $scope.provider.feature='';//re-set to empty
+			 }; 
+			 
+			 $scope.removeFeature = function(index){
+				 $scope.features.splice(index,1);
+			 };
+			  
+			$scope.addFeatureDescription = function(index)  {
+				 $scope.features[index].description.push('');
+			};
+			
+			$scope.removeFeatureDescription = function(index1,index)  {
+				feature = $scope.features[index1].description.splice(index, 1);
+				
+			};
+			
+			
 			 
 	} ]);
 	  

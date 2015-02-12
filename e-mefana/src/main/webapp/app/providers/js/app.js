@@ -1,5 +1,6 @@
 'use strict';
 angular.module('providerApp', [
+        'ui.bootstrap',
 		'ui.router',
 		'ngCookies', 
 		'checklist-model',
