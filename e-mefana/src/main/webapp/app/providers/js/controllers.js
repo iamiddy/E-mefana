@@ -4,7 +4,7 @@
 
 	  providerControllers.controller('RegisterController',
 			  ['$scope','$rootScope', '$geolocation',function($scope,$rootScope,$geolocation) {
-			 
+
 				  
 			 $scope.events = [
 				                  'guest Events 1', 
@@ -45,7 +45,44 @@
 			  };
 			  
 
+			$scope.listingRoles = [{
+									value : 'MANAGER',
+									label : 'Manager'
+								}, {
+									value : 'OWNER',
+									label : 'Owner'
+								}, {
+									value : 'MARKETING_AGENCY',
+									label : 'Marketing Agency'
+								}, {
+									value : 'OTHER',
+									label : 'Other'
+								} ];
 			  
+
+			 $scope.getCssClasses = function(ngModelContoller) {
+				    return {
+				      error: ngModelContoller.$invalid && ngModelContoller.$dirty,
+				      success: ngModelContoller.$valid && ngModelContoller.$dirty
+				    };
+				  };
+				  
+				  $scope.showError = function(ngModelController, error) {
+				    return ngModelController.$error[error];
+				  };
+				  
+				  $scope.canGoNext = function() {
+					    return $scope.listingForm.$valid && $scope.listingForm.$dirty;
+					};
+					  
+				  $scope.canSave = function(){
+					  return $scope.provider.agree && $scope.canGoNext;
+				  }	;  
+				  
+				  $scope.toJSON = function(obj) {
+					    return JSON.stringify(obj, null, 2);
+					  };
+				 
 			  //general information
 			  $scope.provider.uselocation = false;
 			  
@@ -96,7 +133,8 @@
 			  };
 			  
 			  //Features
-			  $scope.provider.feature='';
+			  $scope.provider.feature ='';
+			  $scope.provider.agree = false;
 			  
 			 $scope.addFeature = function(){
 				 $scope.features.push({name :$scope.provider.feature,description:[ ] });
@@ -116,6 +154,15 @@
 				
 			};
 			
+			//photo 
+			 $scope.provider.photo;
+			 
+//		photo =	 {
+//				  "filesize": 54836,
+//				  "filetype": "image/jpeg",
+//				  "filename": "profile.jpg",
+//				  "base64":   "/9j/4AAQSkZJRgABAgAAAQABAAD//gAEKgD/4gIcSUNDX1BST0ZJTEUAAQEAAAIMbGNtcwIQA..."
+//				}
 			
 			 
 	} ]);

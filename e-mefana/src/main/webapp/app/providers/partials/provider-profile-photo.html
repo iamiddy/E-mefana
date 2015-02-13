@@ -1,0 +1,53 @@
+	<div class="panel panel-warning"">
+     <div class="panel-heading"><h5>Choose a photo to represent this listing  
+     <button popover-placement="top" popover="I fade in and out! A description list is perfect for defining termsA description list is perfect for defining termsA description list is perfect for defining terms"   popover-trigger="focus" class="btn">?</button></h5></div>
+			  <div class="panel-body">
+				<div class="row">
+				<div class="form-group" >
+				<div class="col-md-4">
+					<input type="file" ng-model="provider.photo"  base-sixty-four-input>
+				</div>
+				
+				<div class="col-md-3">
+						  <p>
+						    <b>File Name: </b> {{provider.photo.filename}}
+						  </p>
+						  <p>
+						    <b>File type: </b> {{provider.photo.filetype}}
+						  </p>
+						  <p>
+						    <b>File size: </b> {{provider.photo.filesize}}
+						  </p>
+				</div>
+				
+				<div class="col-md-5">
+					<a class="img-thumbnail lightbox" data-plugin-options='{"type":"image"}'>
+							<img class="img-responsive" ng-src="data:{{provider.photo.filetype}};base64,{{provider.photo.base64}}" width="200" height="150" alt=""><!-- thumb -->
+						</a>
+				</div>
+				
+				
+				
+			 </div>
+			
+		</div>
+		</div>
+		</div>				
+		     <!-- AGREE -->
+				<div class="row white-row">
+					<div class="col-md-12">
+						<label class="pointer shop-cart-agree">
+							<input type="checkbox" ng-model="provider.agree" /> I understand and agree the <a href="page-terms-and-conditions.html" target="_blank">terms and conditions</a>.
+							 Check this box to certify that you are an official representative of the property for which you are submitting this listing and that the information you have submitted is correct. In submitting a photo, you also certify that you have the right to use the photo on the web and agree to hold E-mefana harmless for any and all copyright issues arising from your use of the image
+						</label>
+					</div>
+				</div>
+				<!-- /AGREE -->		
+				
+			
+		     <button class="btn btn-primary btn-lg" type="submit" ui-sref="register.services" ><i class="fa fa-left"></i> &nbsp; Previous</button>
+
+			  <button class="btn btn-primary btn-lg" type="submit"  ng-disabled="!canSave()"><i class="fa fa-right"></i> &nbsp; Complete and Submit Registration</button>
+			
+  
+  

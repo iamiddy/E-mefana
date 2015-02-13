@@ -4,6 +4,7 @@ angular.module('providerApp', [
 		'ui.router',
 		'ngCookies', 
 		'checklist-model',
+		'naif.base64',
         'providerControllers',
         'providerFilters',
         'providerServices',
@@ -38,6 +39,10 @@ angular.module('providerApp', [
 					   .state('register.services', {
 					    url: '/provider-service-offering',
 					    templateUrl: 'partials/provider-services.html'
+					  })
+					  .state('register.photo', {
+					    url: '/provider-profile-photo',
+					    templateUrl: 'partials/provider-profile-photo.html'
 					  })
 					  .state('login', {
 					    url: '/login',

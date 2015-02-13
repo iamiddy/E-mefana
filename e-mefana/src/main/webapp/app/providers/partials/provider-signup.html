@@ -11,7 +11,7 @@
 						<div class="col-md-8">
 							<registration-header></registration-header>
 								
-							<form  method="post" ng-submit="" >
+							<form  method="post" name="listingForm"  novalidate="novalidate">
 							  <div ui-view></div>
 							</form>
 
@@ -28,4 +28,5 @@
 
 			</div>
 		
-		
+  <!-- Provider Model: <pre ng-bind="toJSON(provider)"></pre>
+  Form: <pre ng-bind="toJSON(listingForm)"></pre> -->

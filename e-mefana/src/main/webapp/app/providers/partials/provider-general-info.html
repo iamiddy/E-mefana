@@ -1,35 +1,49 @@
 
 			<div class="panel panel-warning">
-			  <div class="panel-heading"><h5>YOUR INFORMATION</h5></div>
+			  <div class="panel-heading"><h5>YOUR INFORMATION {{provider.user.role}}</h5></div>
+			   
 			  <div class="panel-body">
-								
-
+			          <p class="star"><i class="glyphicon glyphicon-star"></i> - denotes required fields</p>
 								<!-- BILLING ADDRESS -->
 								<div class="row ">
 									<div class="form-group">
 									<div class="col-md-6">
-											<label>First Name</label>
-											<input type="text" value="" class="form-control" ng-model="provider.user.firstname"/>
+									<div class="control-group">
+										<label>First Name</label>
+										<i class="glyphicon glyphicon-star star" ng-show="showError(listingForm.firstname, 'required')" ></i>
+										<input type="text" name="firstname" class="form-control" ng-model="provider.user.firstname" ng-minlength="3" ng-maxlength="30" maxlength="35" required/>
+										<span ng-show="showError(listingForm.firstname, 'minlength')" class="help-inline">Minimum length is 3</span>
+										<span ng-show="showError(listingForm.firstname, 'maxlength')" class="help-inline">Maximum length is 30</span>
+                                         
+									</div>
 									</div>
 									<div class="col-md-6">
+									 <div class="control-group">
 											<label>Last Name</label>
-											<input type="text" value="" class="form-control" ng-model="provider.user.lastname" />
+											<i class="glyphicon glyphicon-star star" ng-show="showError(listingForm.lastname, 'required')" ></i>
+											<input type="text" name="lastname" class="form-control" ng-model="provider.user.lastname" ng-minlength="3" ng-maxlength="30" maxlength="35" required/>
+											<span ng-show="showError(listingForm.lastname, 'minlength')" class="help-inline">Minimum length is 3</span>
+										   <span ng-show="showError(listingForm.lastname, 'maxlength')" class="help-inline">Maximum length is 30</span>
+									 </div>
 									</div>
 									</div>
 									<div class="form-group">
 										<div class="col-md-6">
-											<label>E-mail Address</label>
-											<input type="text" value="" class="form-control" ng-model="provider.user.emailaddress">
+										<div class="control-group">
+											<label>E-mail Address </label>
+											<i class="glyphicon glyphicon-star star" ng-show="showError(listingForm.email, 'required')" ></i>
+											<input type="email" name="email" class="form-control" ng-model="provider.user.emailaddress" required>
+										  <span ng-show="showError(listingForm.email, 'email')" class="help-inline">You must enter a valid email</span>
+										</div>
 										</div>
 										<div class="col-md-6">
+										 <div class="control-group">
 											<label>What is your role at this business? </label>
-											<select class="form-control pointer" ng-model="provider.user.role">
-												<option value="">Select a role</option>
-												<option value="MANAGER">Manager</option>
-												<option value="OWNER" >Owner</option>
-												<option value="MARKETING_AGENCY" >Marketing Agency</option>
-												<option value="OTHER" >Other</option>
+											<i class="glyphicon glyphicon-star star" ng-show="showError(listingForm.role, 'required')" ></i>
+											<select class="form-control pointer" name="role" ng-model="provider.user.role" ng-options="opt as opt.label for opt in listingRoles" required> 
+											<option value="" selected>-- Please select your role --</option>
 											</select>
+											</div>
 										</div>
 									</div>
 										
@@ -44,27 +58,41 @@
 								<div class="row">
 									<div class="form-group">
 										<div class="col-md-7">
+										 <div class="control-group">
 											<label>Official business name</label>
-											<input type="text" value="" class="form-control" ng-model="provider.name" />
+											<i class="glyphicon glyphicon-star star" ng-show="showError(listingForm.name, 'required')" ></i>
+											<input type="text" name="name" class="form-control" ng-model="provider.name" ng-minlength="3" ng-maxlength="70" maxlength="75" required/>
+											<span ng-show="showError(listingForm.name, 'minlength')" class="help-inline">Minimum length is 3</span>
+										   <span ng-show="showError(listingForm.name, 'maxlength')" class="help-inline">Maximum length is 70</span>
+											
+											</div>
 										</div>
 										<div class="col-md-5">
+										 <div class="control-group">
 											<label>Category</label>
-											<select class="form-control pointer"  ng-model="provider.category" >
+											<i class="glyphicon glyphicon-star star" ng-show="showError(listingForm.category, 'required')" ></i>
+											<select class="form-control pointer" name="category"  ng-model="provider.category"  required>
 												<option value="">Select a category</option>
 												<option value="Venues">Venues</option>
 												<option value="TZ">Catering</option>
 											</select>
+										 </div>
 										</div>
 									</div>
 									<div class="form-group">
 										<div class="col-md-12">
-										<label>Tell us more about this business </label>
-										<textarea maxlength="5000" data-msg-required="Breafly decribe your business." rows="5" class="form-control"  ng-model="provider.description" ></textarea>
+										<div class="control-group">
+											<label>Tell us more about this business </label>
+											<i class="glyphicon glyphicon-star star" ng-show="showError(listingForm.description, 'required')" ></i>
+											<textarea maxlength="5000" name="description" data-msg-required="Breafly decribe your business." rows="5" class="form-control" ng-minlength="250" ng-maxlength="5000" maxlength="5020" ng-model="provider.description" required ></textarea>
+											<span ng-show="showError(listingForm.description, 'minlength')" class="help-inline">Breafly decribe your business in atleast 200 characters</span>
+											<span ng-show="showError(listingForm.description, 'maxlength')" class="help-inline">Breafly decribe your business in not more than 5000 characters</span>
+										</div>
 									    </div>
 									    
 								    </div>
 								 </div>
 					</div>
 				</div>	
-				<button class="btn btn-primary btn-sm" type="button" ui-sref="register.location"><i class="fa fa-chevron-right"></i> &nbsp; Next</button>	
+				<button class="btn btn-primary btn-lg" type="button" ui-sref="register.location" ng-disabled="!canGoNext()"><i class="fa fa-chevron-right"></i> &nbsp; Next</button>	
 							
