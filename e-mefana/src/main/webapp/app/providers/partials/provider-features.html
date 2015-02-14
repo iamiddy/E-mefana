@@ -8,10 +8,10 @@
 					<label> Feature Name</label>
 				</div>
 				<div class="col-md-8">
-					<input type="text" value="" class="form-control" ng-model="provider.feature" placeholder="Add new feature here"/>
+					<input type="text" class="form-control" ng-model="provider.feature" placeholder="Add new feature here"/>
 				</div>
 				<div class="col-md-2">
-					   <button class="btn btn-default btn-xs form-control" ng-click="addFeature()">
+					   <button class="btn btn-default btn-xs form-control" ng-click="addFeature()" ng-disabled="!provider.feature">
 								 Save feature
 							</button>
 					</div>		

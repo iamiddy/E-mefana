@@ -72,11 +72,11 @@
 				  };
 				  
 				  $scope.canGoNext = function() {
-					    return $scope.listingForm.$valid && $scope.listingForm.$dirty;
+					    return $scope.listingForm.$valid && $scope.listingForm.$dirty ;
 					};
 					  
 				  $scope.canSave = function(){
-					  return $scope.provider.agree && $scope.canGoNext;
+					  return $scope.provider.agree && $scope.canGoNext && $scope.hasEventsToServe && isVenuesWithVenueSpace;
 				  }	;  
 				  
 				  $scope.toJSON = function(obj) {
@@ -99,6 +99,26 @@
 				};
 			 $scope.hasVenue = function(){
 				 return $scope.provider.category == "Venues";
+			 };
+			 
+			 $scope.isVenuesWithVenueSpace = function(){
+				 if ($scope.provider.venues === undefined) return false;
+					
+				return  $scope.hasVenue ? $scope.provider.venues.length > 0 : true;
+			 };
+			 
+			 $scope.hasServices = function(){
+				 if($scope.provider.services === undefined) return false;
+					
+				 return $scope.provider.services.length > 0;
+			 };
+			 
+			 $scope.hasEventtypes= function(){
+				 if ($scope.provider.events === undefined) {
+						return false;
+					}
+					
+				 return $scope.provider.events.length > 0;
 			 };
 			 
 			 $scope.addVenue = function(){

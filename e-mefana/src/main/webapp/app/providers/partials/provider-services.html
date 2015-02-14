@@ -1,6 +1,7 @@
 <div class="panel panel-warning"">
      <div class="panel-heading"><h5>TYPES OF EVENTS THAT THIS BUSINESS CAN CATER TO</h5></div>
 	 <div class="panel-body">
+	  <span ng-show="!hasEventtypes()" class="help-inline">You must select at least one type of  event</span>
 		<div class="row">
 		<div class="col-md-6 " ng-repeat="event in events">
 			<div class="checkbox">
@@ -22,6 +23,7 @@
      <div class="panel-heading"><h5>BUSINESS SERVICE OFFERING </h5></div>
 			  <div class="panel-body">
 								<p>Does <strong>{{provider.name}}</strong> offer any of the following?, tick all that apply</p>
+								<span ng-hide="hasServices()" class="help-inline">You must select at least one type of  service</span>
 				<div class="row">
 				  <ul class="list-group">
 				   <div class="col-md-6 ">
@@ -51,4 +53,4 @@
 
 		     <button class="btn btn-primary btn-lg" type="submit" ui-sref="register.features" ><i class="fa fa-left"></i> &nbsp; Previous</button>
 
-			  <button class="btn btn-primary btn-lg" type="submit" ui-sref="register.photo" ><i class="fa fa-right" ng-disabled="!canGoNext()"></i> &nbsp; Next</button>
+			  <button class="btn btn-primary btn-lg" type="submit" ui-sref="register.photo" ng-disabled="!canGoNext() || !hasEventtypes() || !hasServices()"><i class="fa fa-right" ></i> &nbsp; Next</button>

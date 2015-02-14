@@ -4,12 +4,9 @@
 			  <div class="panel-body">
 				<div class="row">
 				<div class="form-group" >
-				<div class="col-md-4">
-					<input type="file" ng-model="provider.photo"  base-sixty-four-input>
-				</div>
-				
-				<div class="col-md-3">
-						  <p>
+				<div class="col-md-6">
+					<input type="file" ng-model="provider.photo"  base-sixty-four-input required>
+					 <p>
 						    <b>File Name: </b> {{provider.photo.filename}}
 						  </p>
 						  <p>
@@ -20,11 +17,15 @@
 						  </p>
 				</div>
 				
-				<div class="col-md-5">
+				<div class="col-md-6">
 					<a class="img-thumbnail lightbox" data-plugin-options='{"type":"image"}'>
-							<img class="img-responsive" ng-src="data:{{provider.photo.filetype}};base64,{{provider.photo.base64}}" width="200" height="150" alt=""><!-- thumb -->
+							<img class="img-responsive" ng-src="data:{{provider.photo.filetype}};base64,{{provider.photo.base64}}" width="260" height="260" alt=""><!-- thumb -->
 						</a>
 				</div>
+						 
+				</div>
+				
+				
 				
 				
 				

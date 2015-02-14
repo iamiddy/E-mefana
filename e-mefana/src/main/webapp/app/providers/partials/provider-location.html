@@ -1,7 +1,7 @@
 <div class="panel panel-warning"">
      <div class="panel-heading"><h5>BUSINESS PHYSICAL ADDRESS INFORMATION</h5></div>
 			  <div class="panel-body">
-								
+								  <p class="star"><i class="glyphicon glyphicon-star"></i> - denotes required fields</p>
 							<div class="row">
 								    <div class="form-group">
 								     <div class="col-md-12 "  >
@@ -11,23 +11,32 @@
 									 </label>
 					               </div>
 								    <div class="col-md-6">
+								    	<div class="control-group">
 											<label>Country</label>
-											<select class="form-control pointer" ng-model="provider.country"  >
+											<i class="glyphicon glyphicon-star star" ng-show="showError(listingForm.country, 'required')" ></i>
+											<select class="form-control pointer" name="country" ng-model="provider.country"  required>
 												<option value="">Select a country</option>
 												<option value="TZ">Tanzania</option>
 											</select>
 										</div>
+									</div>
 										
 										<div class="col-md-6">
+											<div class="control-group">
 											<label>City</label>
-											<input type="text" value="" class="form-control" ng-model="provider.city"  />
+											<i class="glyphicon glyphicon-star star" ng-show="showError(listingForm.city, 'required')" ></i>
+											<input type="text" name="city" class="form-control" ng-model="provider.city"  required/>
+											</div>
 										</div>
 									</div>
 									
 									<div class="form-group">
 									<div class="col-md-6">
+										<div class="control-group">
 											<label>Street address</label>
-											<input type="text" ng-model="provider.streetaddress"  class="form-control" placeholder="example: 123 Main Street" />
+											<i class="glyphicon glyphicon-star star" ng-show="showError(listingForm.address, 'required')" ></i>
+											<input type="text" name="address" ng-model="provider.streetaddress"  class="form-control" placeholder="example: 123 Main Street"  required/>
+										</div>
 									</div>
 									<div class="col-md-6">
 											<label>Additional address information</label>
@@ -40,12 +49,18 @@
 								<div class="row">
 									<div class="form-group">
 										<div class="col-md-6">
+										<div class="control-group">
 											<label>Phone Number </label>
-											<input type="text" ng-model="provider.phonenumber"  class="form-control" />
+											<i class="glyphicon glyphicon-star star" ng-show="showError(listingForm.providerphone, 'required')" ></i>
+											<input type="text" name="providerphone" ng-model="provider.phonenumber"  class="form-control"  required/>
+										 </div>
 										</div>
 										<div class="col-md-6">
+											<div class="control-group">
 											<label>Email Address </label>
-											<input type="text" ng-model="provider.emailaddress"  class="form-control" />
+											<input type="email" name="provideremail" ng-model="provider.emailaddress"  class="form-control" />
+											<span ng-show="showError(listingForm.provideremail, 'email')" class="help-inline">You must enter a valid email</span>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -53,38 +68,48 @@
 								<div class="row">
 									<div class="form-group">
 										<div class="col-md-6">
+										  <div class="control-group">
 											<label>Website </label>
-											<input type="text" ng-model="provider.website"  class="form-control" />
+											<input type="url" name="website" ng-model="provider.website"  class="form-control" />
+											<span ng-show="showError(listingForm.website, 'url')" class="help-inline">You must enter a valid url</span>
+											</div>
 										</div>
 										<div class="col-md-6">
+											<div class="control-group">
 											<label>Facebook page </label>
-											<input type="text" ng-model="provider.facebook"  class="form-control" />
+											<input type="url"  name="fburl" ng-model="provider.facebook"  class="form-control" />
+											<span ng-show="showError(listingForm.fburl, 'url')" class="help-inline">You must enter a valid url</span>
+											</div>
 										</div>
 									</div>
 								</div>
 					</div>
 				</div>	
-		  <div class="panel panel-warning"" ng-show="hasVenue()">
+		  <div class="panel panel-warning" ng-if="hasVenue()">
            <div class="panel-heading"><h5>VENUE FEATURES</h5></div>
 			  <div class="panel-body">
-			   <p>If you have additional Venue space, list them here  </p>
+			     <span ng-show="!isVenuesWithVenueSpace()" class="help-inline">Please list atleast one venue space</span>
 						<div class="row" >
 						 <div class="form-group" >
 							<div class="col-md-3" ng-repeat-start="venue in provider.venues">
 									<label>Name</label>
-									<input type="text" class="form-control" ng-model="venue.name"/>
+									<i class="glyphicon glyphicon-star star" ></i>
+									<input type="text" name="venuename" class="form-control" ng-minlength="1" ng-model="venue.name" required/>
 							</div>
 							<div class="col-md-2">
-									<label>Max Capacity</label>
-									<input type="text"  class="form-control" ng-model="venue.capacity"/>
+									<label>Capacity</label>
+									<i class="glyphicon glyphicon-star star" ></i>
+									<input type="text"  name="venuecapacity" class="form-control" ng-minlength="2" ng-model="venue.capacity" required/>
 							</div>
 							   <div class="col-md-3" >
 									<label>Price</label>
-									<input type="text" class="form-control" ng-model="venue.price" />
+									<i class="glyphicon glyphicon-star star"></i>
+									<input type="text" name="venueprice" class="form-control" ng-minlength="2" ng-model="venue.price"  required/>
 								</div>
 								<div class="col-md-2" >
 								<label>Currency</label>
-											<select class="form-control pointer" ng-model="venue.currency"  >
+								<i class="glyphicon glyphicon-star star" ></i>
+											<select name="venuecurrency" class="form-control pointer" ng-model="venue.currency"  required>
 												<option value="TZS">TZS</option>
 												<option value="USD">USD</option>
 											</select>
@@ -95,9 +120,8 @@
 									<button type="button" class="btn  btn-xs form-control"  ng-click="removeVenue($index)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
 							</div>
 						 </div>
-						   
 						</div> 
-							<button type="button" class="btn btn-xs" ng-click="addVenue()"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Venue Space</button>
+							<button type="button" class="btn btn-xs" ng-click="addVenue()"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> You have additional Venue space, list them here</button>
 					
 			  </div>
 			</div>	
@@ -105,4 +129,4 @@
 						
 		     <button class="btn btn-primary btn-lg" type="submit" ui-sref="register.start" ><i class="fa fa-left"></i> &nbsp; Previous</button>
 
-			  <button class="btn btn-primary btn-lg" type="submit" ui-sref="register.features"  ng-disabled="!canGoNext()"><i class="fa fa-right"></i> &nbsp; Next</button>
+			  <button class="btn btn-primary btn-lg" type="submit" ui-sref="register.features"  ng-disabled="!canGoNext() || !isVenuesWithVenueSpace()"><i class="fa fa-right"></i> &nbsp; Next</button>
