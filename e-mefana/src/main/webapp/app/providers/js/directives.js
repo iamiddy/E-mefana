@@ -32,8 +32,8 @@
 		  return {
 			  restrict :'E',
 			  transclude: true,
-			  templateUrl : 'partials/provider-whyregister.html',
-			  controller: 'RegisterController'
+			  templateUrl : 'partials/provider-whyregister.html'
+			  //controller: 'RegisterController'
 		  };
 	  });
   

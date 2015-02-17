@@ -22,14 +22,14 @@ import com.idrene.emefana.AbstractIntegrationTest;
  */
 public class UtililityBeanTest extends AbstractIntegrationTest{
 	
-	@Test
+	//@Test
 	public void InputStreamToBase64Test() throws IOException{
 		String base64 = UtilityBean.InputStreamToBase64(Optional.ofNullable(resource.getInputStream()), "jpg").get();
 		assertNotNull(base64);
 		assertTrue(base64.contains("data:image/jpg;base64")); 
 	}
 	
-	@Test
+	//@Test
 	public void Base64ToInputStreamTest() throws IOException{
 		String base64 = UtilityBean.InputStreamToBase64(Optional.ofNullable(resource.getInputStream()), "jpg").get();
 		assertNotNull(base64);
@@ -60,6 +60,16 @@ public class UtililityBeanTest extends AbstractIntegrationTest{
 	        i1.close();
 	        i2.close();
 	    }
+	}
+	
+	@Test
+	public void phoneNumberMatcher(){
+		String pattern = "^(\\+|0)[0-9]{7,14}$";
+		String[] phones = {"0756354180","+255756354180","+14106354180"};
+		for(String p : phones){
+			assertTrue(p.matches(pattern));
+		}
+		
 	}
 	
 	

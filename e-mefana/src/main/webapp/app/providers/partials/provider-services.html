@@ -3,17 +3,17 @@
 	 <div class="panel-body">
 	  <span ng-show="!hasEventtypes()" class="help-inline">You must select at least one type of  event</span>
 		<div class="row">
-		<div class="col-md-6 " ng-repeat="event in events">
+		<div class="col-md-6 " ng-repeat="event in events ">
 			<div class="checkbox">
 			  <label>
 			    <input type="checkbox" checklist-model="provider.events" checklist-value="event">
-			      {{event}}
+			      {{event.eid}} <a href="#" tooltip="{{event.description}}"><i class="fa fa-info-circle"></i></a>
 			  </label>
 			</div>
 			</div>
 			<p>&nbsp;</p>
 			<p>
-			  <button type="button" class="btn btn-warning  btn-xs" ng-click="checkAll('E')"><i class="fa fa-check"></i>Check all Events</button>
+			  <button type="button" class="btn btn-primary  btn-xs" ng-click="checkAll('E')"><i class="fa fa-check"></i>Check all Events</button>
 			  <button type="button" class="btn btn-default btn-xs" ng-click="uncheckAll('E')"><i class="fa fa-times"></i>Uncheck all</button>
 			</p>
 		</div>
@@ -27,23 +27,23 @@
 				<div class="row">
 				  <ul class="list-group">
 				   <div class="col-md-6 ">
-					<li class="list-group-item" ng-repeat="service in services" ng-if="$odd">
+					<li class="list-group-item" ng-repeat="service in services|filter:{providerTypes:provider.category}" ng-if="$odd">
 						<div class="checkbox">
-							<label> <input type="checkbox" checklist-model="provider.services" checklist-value="service"> {{service}}</label>
+							<label> <input type="checkbox" checklist-model="provider.services" checklist-value="service"> {{service.sid}}</label>
 						</div>
 					</li>
 				  </div>
 				  <div class="col-md-6 ">
-				  <li class="list-group-item" ng-repeat="service in services" ng-if="$even">
+				  <li class="list-group-item" ng-repeat="service in services|filter:{providerTypes:provider.category}" ng-if="$even">
 						<div class="checkbox">
-							<label> <input type="checkbox" checklist-model="provider.services" checklist-value="service"> {{service}}</label>
+							<label> <input type="checkbox" checklist-model="provider.services" checklist-value="service"> {{service.sid}}</label>
 						</div>
 					</li>
 				 </div>
 						</ul>
 						<p>&nbsp;</p>
 			<p>
-				<button type="button" class="btn btn-warning btn-xs"ng-click="checkAll('S')"><i class="fa fa-check"></i>Check all Services</button>
+				<button type="button" class="btn btn-primary btn-xs"ng-click="checkAll('S')"><i class="fa fa-check"></i>Check all Services</button>
 				<button type="button" class="btn btn-default btn-xs" ng-click="uncheckAll('S')"><i class="fa fa-times"></i>Uncheck all</button>
 			</p>
 		 </div>
@@ -51,6 +51,6 @@
 		</div>
 		</div>	
 
-		     <button class="btn btn-primary btn-lg" type="submit" ui-sref="register.features" ><i class="fa fa-left"></i> &nbsp; Previous</button>
+		     <button class="btn btn-primary btn-lg" type="submit" ui-sref="register.features" ><i class="fa fa-hand-o-left"></i> &nbsp; Previous</button>
 
-			  <button class="btn btn-primary btn-lg" type="submit" ui-sref="register.photo" ng-disabled="!canGoNext() || !hasEventtypes() || !hasServices()"><i class="fa fa-right" ></i> &nbsp; Next</button>
+			  <button class="btn btn-primary btn-lg" type="submit" ui-sref="register.photo" ng-disabled="!canGoNext() || !hasEventtypes() || !hasServices()"><i class="fa fa-right" ></i> Next Section &nbsp;<i class="fa fa-hand-o-right"></i></button>

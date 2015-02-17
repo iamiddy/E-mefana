@@ -42,7 +42,7 @@
 							</div>
 
 							<p class="nomargin-bottom">
-								<span class="block"><strong><i class="fa fa-map-marker"></i> Address:</strong> {{provider.streetaddress}}, {{provider.city}}, {{provider.country}}</span>
+								<span class="block"><strong><i class="fa fa-map-marker"></i> Address:</strong> {{provider.streetaddress}}, {{provider.city | json}}, {{provider.country}}</span>
 								<span class="block"><strong><i class="fa fa-phone"></i> Phone:</strong> {{provider.phonenumber}}</span>
 								<span class="block"><strong><i class="fa fa-envelope"></i> Email:</strong> <a href="mailto:mail@yourdomain.com">{{provider.emailaddress}}</a></span>
 							</p>

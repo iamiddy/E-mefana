@@ -1,11 +1,15 @@
 'use strict';
 
 /* Services */
-var phonecatServices = angular.module('providerServices', ['ngResource']);
+var providerServices = angular.module('providerServices', ['ngResource']);
 
-//phonecatServices.factory('Phone', ['$resource',function($resource){
-//    return $resource('phones/:phoneId.json', {}, {
-//      query: {method:'GET', params:{phoneId:'phones'}, isArray:true}
-//    });
-//  }]);
-
+providerServices.factory('MetaService', ['$resource',function($resource){
+    return $resource('api/metadata', {},{
+			    query : {
+					method : 'GET',
+					headers : {'Accept': 'application/json'},
+					isArray: true
+			  }
+	  });
+  
+}]);

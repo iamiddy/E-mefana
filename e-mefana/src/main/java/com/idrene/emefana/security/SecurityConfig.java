@@ -84,7 +84,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		           //.antMatchers("/providers/**").hasRole("ADMIN")   
 		           //.antMatchers("/db/**").access("hasRole('ROLE_ADMIN') and hasRole('ROLE_DBA')")  
 		           //.anyRequest().authenticated();
-				.antMatchers("/persons").authenticated();
+				.antMatchers("/persons").authenticated()
+		        .antMatchers("/api/**").authenticated()
+		        .antMatchers("app/api/**").authenticated()
+	        	.antMatchers("app/providers/api/**").authenticated();
 				//.permitAll();
 				     
 	}

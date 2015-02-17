@@ -14,9 +14,8 @@
 								    	<div class="control-group">
 											<label>Country</label>
 											<i class="glyphicon glyphicon-star star" ng-show="showError(listingForm.country, 'required')" ></i>
-											<select class="form-control pointer" name="country" ng-model="provider.country"  required>
+											<select class="form-control pointer" name="country" ng-model="provider.country"  ng-options="country for country in countries" required>
 												<option value="">Select a country</option>
-												<option value="TZ">Tanzania</option>
 											</select>
 										</div>
 									</div>
@@ -25,7 +24,7 @@
 											<div class="control-group">
 											<label>City</label>
 											<i class="glyphicon glyphicon-star star" ng-show="showError(listingForm.city, 'required')" ></i>
-											<input type="text" name="city" class="form-control" ng-model="provider.city"  required/>
+											<input type="text" name="city" class="form-control" ng-model="provider.city" typeahead="city as city.cid for city in cities | filter:{cid:$viewValue}" typeahead-editable="false" required/>
 											</div>
 										</div>
 									</div>
@@ -52,7 +51,8 @@
 										<div class="control-group">
 											<label>Phone Number </label>
 											<i class="glyphicon glyphicon-star star" ng-show="showError(listingForm.providerphone, 'required')" ></i>
-											<input type="text" name="providerphone" ng-model="provider.phonenumber"  class="form-control"  required/>
+											<input type="text" ng-pattern="phone_pattern" name="providerphone" ng-model="provider.phonenumber"  class="form-control"  required/>
+											<span ng-show="showError(listingForm.providerphone, 'pattern')" class="help-inline">You must enter a valid Phone number</span>
 										 </div>
 										</div>
 										<div class="col-md-6">
@@ -99,12 +99,12 @@
 							<div class="col-md-2">
 									<label>Capacity</label>
 									<i class="glyphicon glyphicon-star star" ></i>
-									<input type="text"  name="venuecapacity" class="form-control" ng-minlength="2" ng-model="venue.capacity" required/>
+									<input type="number"  name="venuecapacity" class="form-control" ng-minlength="2" ng-model="venue.capacity" ng-model="venue.price" min="10" max="5000" required/>
 							</div>
 							   <div class="col-md-3" >
 									<label>Price</label>
 									<i class="glyphicon glyphicon-star star"></i>
-									<input type="text" name="venueprice" class="form-control" ng-minlength="2" ng-model="venue.price"  required/>
+									<input type="number" name="venueprice" class="form-control" ng-model="venue.price" min="10"  required/>
 								</div>
 								<div class="col-md-2" >
 								<label>Currency</label>
@@ -127,6 +127,6 @@
 			</div>	
 			
 						
-		     <button class="btn btn-primary btn-lg" type="submit" ui-sref="register.start" ><i class="fa fa-left"></i> &nbsp; Previous</button>
+		     <button class="btn btn-primary btn-lg" type="submit" ui-sref="register.start" ><i class="fa fa-hand-o-left"></i> &nbsp; Previous</button>
 
-			  <button class="btn btn-primary btn-lg" type="submit" ui-sref="register.features"  ng-disabled="!canGoNext() || !isVenuesWithVenueSpace()"><i class="fa fa-right"></i> &nbsp; Next</button>
+			  <button class="btn btn-primary btn-lg" type="submit" ui-sref="register.features"  ng-disabled="!canGoNext() || !isVenuesWithVenueSpace()"><i class="fa fa-right"></i>  Next Section &nbsp;<i class="fa fa-hand-o-right"></i></button>

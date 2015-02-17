@@ -43,6 +43,7 @@ public class City {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((cid == null) ? 0 : cid.hashCode());
+		result = prime * result + ((country == null) ? 0 : country.hashCode());
 		result = prime * result + ((region == null) ? 0 : region.hashCode());
 		return result;
 	}
@@ -62,16 +63,20 @@ public class City {
 		if (cid == null) {
 			if (other.cid != null)
 				return false;
-		} else if (!cid.equalsIgnoreCase(other.cid))
+		} else if (!cid.equals(other.cid))
+			return false;
+		if (country == null) {
+			if (other.country != null)
+				return false;
+		} else if (!country.equals(other.country))
 			return false;
 		if (region == null) {
 			if (other.region != null)
 				return false;
-		} else if (!region.equalsIgnoreCase(other.region))
+		} else if (!region.equals(other.region))
 			return false;
 		return true;
 	}
-	
 	
 
 }

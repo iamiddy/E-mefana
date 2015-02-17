@@ -3,39 +3,25 @@
 	var providerControllers = angular.module('providerControllers', ['ngGeolocation']);
 
 	  providerControllers.controller('RegisterController',
-			  ['$scope','$rootScope', '$geolocation',function($scope,$rootScope,$geolocation) {
-
-				  
-			 $scope.events = [
-				                  'guest Events 1', 
-				                  'user Events 2', 
-				                  'customer Events 3', 
-				                  'admin Events 4'
-				                ];
-			 $scope.services = [
-				                  'guest services 1', 
-				                  'user services 2', 
-				                  'customer services 3', 
-				                  'admin services 4'
-				                ];
-			 $scope.features = [
-				                 {
-				                	 name : 'Description lists',
-				                	 description :[
-				                	               'description list is perfect for defining terms',
-				                	               'Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.',
-				                	               ' Donec id elit non mi porta gravida at eget metus'
-				                	              ]
-				                 },
-				                 {
-				                	 name : 'Malesuada porta',
-				                	 description :[
-				                	               'Etiam porta sem malesuada magna mollis euismod',
-				                	               'Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh' ,
-				                	               ' ut fermentum massa justo sit amet risus',
-				                	              ]
-				                 },
-				                ];
+			  ['$scope',
+			   '$rootScope', 
+			   '$geolocation',
+			   '$state','$filter','metaDataFactory','MetadataService',function($scope,$rootScope,$geolocation,$state,$filter,metaDataFactory,MetadataService) {
+			
+		     $scope.phone_pattern=/^((\+)|(00)|(\*)|())[0-9]{10,14}((\#)|())$/;	
+		     
+		     MetadataService.$promise.then(function(result){
+		    	 //$scope.meatadata = angular.toJson(result, true);PROVIDER_REP_ROLES
+		    	 $scope.cities = $filter('filter')(result, { key: "CITIES" })[0].value;
+		    	 $scope.listingRoles = $filter('filter')(result, { key: "PROVIDER_REP_ROLES" })[0].value;
+		    	 $scope.countries = $filter('filter')(result, { key: "COUNTRIES" })[0].value;
+		    	 $scope.provider_categories = $filter('filter')(result, { key: "PROVIDER_CATEGORIES" })[0].value;
+		    	 $scope.events = $filter('filter')(result, { key: "EVENTS" })[0].value;
+		    	 $scope.services = $filter('filter')(result, { key: "SERVICES" })[0].value;
+		    	 
+		     });
+			
+			 $scope.features = [];
 			 
 			  $scope.provider = {
 					  venues : [ {name:'',capacity:'',price:''}],
@@ -45,38 +31,27 @@
 			  };
 			  
 
-			$scope.listingRoles = [{
-									value : 'MANAGER',
-									label : 'Manager'
-								}, {
-									value : 'OWNER',
-									label : 'Owner'
-								}, {
-									value : 'MARKETING_AGENCY',
-									label : 'Marketing Agency'
-								}, {
-									value : 'OTHER',
-									label : 'Other'
-								} ];
-			  
-
 			 $scope.getCssClasses = function(ngModelContoller) {
 				    return {
 				      error: ngModelContoller.$invalid && ngModelContoller.$dirty,
 				      success: ngModelContoller.$valid && ngModelContoller.$dirty
 				    };
 				  };
+
 				  
 				  $scope.showError = function(ngModelController, error) {
 				    return ngModelController.$error[error];
 				  };
 				  
+				  /**
+				   * 
+				   */
 				  $scope.canGoNext = function() {
 					    return $scope.listingForm.$valid && $scope.listingForm.$dirty ;
 					};
 					  
 				  $scope.canSave = function(){
-					  return $scope.provider.agree && $scope.canGoNext && $scope.hasEventsToServe && isVenuesWithVenueSpace;
+					  return $scope.provider.agree && $scope.canGoNext && $scope.hasEventtypes && $scope.isVenuesWithVenueSpace;
 				  }	;  
 				  
 				  $scope.toJSON = function(obj) {
@@ -88,7 +63,11 @@
 			  
 			  $scope.loadmap = function(){
 					if($scope.provider.uselocation){
-						$scope.$geolocation = $geolocation
+						$scope.$geolocation = $geolocation;
+						// basic usage
+					    $geolocation.getCurrentPosition().then(function(location) {
+					      $scope.provider.location = location.coords;
+					    });
 						    $geolocation.watchPosition({
 						      timeout: 60000,
 						      maximumAge: 2,
@@ -98,7 +77,9 @@
 					   
 				};
 			 $scope.hasVenue = function(){
-				 return $scope.provider.category == "Venues";
+				 if ($scope.provider.category === undefined) return false;
+				 if ($scope.provider.category.type === undefined) return false;
+				 return $scope.provider.category.type == "Venues";
 			 };
 			 
 			 $scope.isVenuesWithVenueSpace = function(){
@@ -157,20 +138,20 @@
 			  $scope.provider.agree = false;
 			  
 			 $scope.addFeature = function(){
-				 $scope.features.push({name :$scope.provider.feature,description:[ ] });
+				 $scope.provider.features.push({name :$scope.provider.feature,description:[ ] });
 				 $scope.provider.feature='';//re-set to empty
 			 }; 
 			 
 			 $scope.removeFeature = function(index){
-				 $scope.features.splice(index,1);
+				 $scope.provider.features.splice(index,1);
 			 };
 			  
 			$scope.addFeatureDescription = function(index)  {
-				 $scope.features[index].description.push('');
+				 $scope.provider.features[index].description.push('');
 			};
 			
 			$scope.removeFeatureDescription = function(index1,index)  {
-				feature = $scope.features[index1].description.splice(index, 1);
+				feature = $scope.provider.features[index1].description.splice(index, 1);
 				
 			};
 			
@@ -184,6 +165,11 @@
 //				  "base64":   "/9j/4AAQSkZJRgABAgAAAQABAAD//gAEKgD/4gIcSUNDX1BST0ZJTEUAAQEAAAIMbGNtcwIQA..."
 //				}
 			
+		$scope.submitListing = function(){
+			//console.log(angular.toJson($scope.provider,true));
+			$state.go("register.registered");
+		};	 
+		
 			 
 	} ]);
 	  
@@ -196,17 +182,6 @@
 			  ['$scope','$rootScope','$location', '$cookieStore',
 			   function($scope, $rootScope, $location, $cookieStore) {
 	} ]);
-  
-
-//   providerControllers.controller('PhoneDetailCtrl', ['$scope', '$routeParams', 'Phone', function($scope, $routeParams, Phone) {
-//   $scope.phone = Phone.get({phoneId: $routeParams.phoneId}, function(phone) {
-//    $scope.mainImageUrl = phone.images[0];
-//  });
-//
-//  $scope.setImage = function(imageUrl) {
-//    $scope.mainImageUrl = imageUrl;
-//  }
-//}]);
 
 })();
 

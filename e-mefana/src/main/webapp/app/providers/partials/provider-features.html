@@ -1,6 +1,6 @@
 	<div class="panel panel-warning"">
      <div class="panel-heading"><h5>SPECIAL BUSINESS FEATURES/AMENITIES  
-     <button popover-placement="top" popover="I fade in and out! A description list is perfect for defining termsA description list is perfect for defining termsA description list is perfect for defining terms"   popover-trigger="focus" class="btn">?</button></h5></div>
+     <button popover-placement="top" popover="I fade in and out! A description list is perfect for defining termsA description list is perfect for defining termsA description list is perfect for defining terms"   popover-trigger="focus" class="btn"><i class="fa fa-info-circle"></i></button></h5></div>
 			  <div class="panel-body">
 				<div class="row">
 				<div class="form-group" >
@@ -17,7 +17,7 @@
 					</div>		
 			 </div>
 			<div class="list-group">
-			 <div class="list-group-item" ng-repeat="feature in features track by $index">
+			 <div class="list-group-item" ng-repeat="feature in provider.features track by $index">
 				<h4 class="list-group-item-heading" >
 				   {{feature.name}}<a ng-click="removeFeature($index)"><i class="fa fa-times" ></i></a>
 				</h4>
@@ -28,7 +28,7 @@
 				    
 				    <div class="form-times" ng-if="featurelist.length < 5">
 				      
-					      <input type="text" class="form-control" ng-model="feature.description[$index]"  ng-model-options="{ debounce: 1000 }" placeholder="Another decription line here" >
+					      <input type="text" class="form-control" ng-model="feature.description[$index]"  ng-model-options="{ debounce: 1500 }" placeholder="Another decription line here" >
 					    
 					  </div>
 					</li>
@@ -44,6 +44,6 @@
 		</div>
 		</div>
 		</div>				
-		     <button class="btn btn-primary btn-lg" type="submit" ui-sref="register.location" ><i class="fa fa-left"></i> &nbsp; Previous</button>
+		     <button class="btn btn-primary btn-lg" type="submit" ui-sref="register.location" ><i class="fa fa-hand-o-left"></i> &nbsp; Previous</button>
 
-			  <button class="btn btn-primary btn-lg" type="submit" ui-sref="register.services" ><i class="fa fa-right" ng-disabled="canGoNext()"></i> &nbsp; Next</button>
+			  <button class="btn btn-primary btn-lg" type="submit" ui-sref="register.services" ng-disabled="!canGoNext()">Next Section &nbsp; <i class="fa fa-hand-o-right"></i>  </button>

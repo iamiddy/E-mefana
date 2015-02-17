@@ -1,6 +1,6 @@
 
 			<div class="panel panel-warning">
-			  <div class="panel-heading"><h5>YOUR INFORMATION {{provider.user.role}}</h5></div>
+			  <div class="panel-heading"><h5>YOUR INFORMATION </h5></div>
 			   
 			  <div class="panel-body">
 			          <p class="star"><i class="glyphicon glyphicon-star"></i> - denotes required fields</p>
@@ -37,10 +37,11 @@
 										</div>
 										</div>
 										<div class="col-md-6">
+										<!--  ng-options="role.value as role.label for role in listingRoles"-->
 										 <div class="control-group">
 											<label>What is your role at this business? </label>
 											<i class="glyphicon glyphicon-star star" ng-show="showError(listingForm.role, 'required')" ></i>
-											<select class="form-control pointer" name="role" ng-model="provider.user.role" ng-options="opt as opt.label for opt in listingRoles" required> 
+											<select class="form-control pointer" name="role" ng-model="provider.user.role" ng-options="role.label for role in listingRoles" required> 
 											<option value="" selected>-- Please select your role --</option>
 											</select>
 											</div>
@@ -69,12 +70,10 @@
 										</div>
 										<div class="col-md-5">
 										 <div class="control-group">
-											<label>Category</label>
+											<label>Category{{provider.category}}</label>
 											<i class="glyphicon glyphicon-star star" ng-show="showError(listingForm.category, 'required')" ></i>
-											<select class="form-control pointer" name="category"  ng-model="provider.category"  required>
+											<select class="form-control pointer" name="category"  ng-model="provider.category" ng-options="category as category.type for category in provider_categories"  required>
 												<option value="">Select a category</option>
-												<option value="Venues">Venues</option>
-												<option value="TZ">Catering</option>
 											</select>
 										 </div>
 										</div>
@@ -85,7 +84,7 @@
 											<label>Tell us more about this business </label>
 											<i class="glyphicon glyphicon-star star" ng-show="showError(listingForm.description, 'required')" ></i>
 											<textarea maxlength="5000" name="description" data-msg-required="Breafly decribe your business." rows="5" class="form-control" ng-minlength="250" ng-maxlength="5000" maxlength="5020" ng-model="provider.description" required ></textarea>
-											<span ng-show="showError(listingForm.description, 'minlength')" class="help-inline">Breafly decribe your business in atleast 200 characters</span>
+											<span ng-show="showError(listingForm.description, 'minlength')" class="help-inline">Breafly decribe your business in atleast  200 characters</span>
 											<span ng-show="showError(listingForm.description, 'maxlength')" class="help-inline">Breafly decribe your business in not more than 5000 characters</span>
 										</div>
 									    </div>
@@ -94,5 +93,5 @@
 								 </div>
 					</div>
 				</div>	
-				<button class="btn btn-primary btn-lg" type="button" ui-sref="register.location" ng-disabled="!canGoNext()"><i class="fa fa-chevron-right"></i> &nbsp; Next</button>	
+				<button class="btn btn-primary btn-lg" type="button" ui-sref="register.location" ng-disabled="!canGoNext()">Next Section &nbsp;<i class="fa fa-hand-o-right"></i></button>	
 							
