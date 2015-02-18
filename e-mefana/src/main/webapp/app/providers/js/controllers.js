@@ -113,11 +113,14 @@
 			 // services
 			 $scope.checkAll = function(type) {
 				 if(type == "E"){
+					 
 					 $scope.provider.events = angular.copy($scope.events);
 				 }
 					 
 				 if(type == "S"){
-					 $scope.provider.services= angular.copy($scope.services);
+
+					 //filter by provider category & then copy {providerTypes:provider.category}
+					 $scope.provider.services= angular.copy($filter('filter')($scope.services, {providerTypes:$scope.provider.category}));
 				 }
 				 
 				 if(type == "F"){

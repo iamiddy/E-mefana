@@ -53,7 +53,7 @@ angular.module('providerApp', [
 					    url: '/provider-profile-photo',
 					    templateUrl: 'partials/provider-profile-photo.html'
 					  })
-					   .state('c', {
+					   .state('register.registered', {
 					    url: '/thank-you-for-registering',
 					    templateUrl: 'partials/provider-thank-you.html'
 					  })
