@@ -23,11 +23,11 @@ angular.module('providerApp', [
 					    url: '/registration',
 					    templateUrl: 'partials/provider-signup.html',
 					    resolve:{
-						    	metaDataFactory :function($http) {
-						    		return  $http({method: 'GET', url: '../data/cities.json'})
-						        },
-						   MetadataService :function(MetaService){
-							   return MetaService.query();
+//						    	metaDataFactory :function($http) {
+//						    		return  $http({method: 'GET', url: '../data/cities.json'})
+//						        },
+						       MetadataService :function(MetaService){
+							      return MetaService.query();
 						   }
 					    },
 					    controller:'RegisterController',

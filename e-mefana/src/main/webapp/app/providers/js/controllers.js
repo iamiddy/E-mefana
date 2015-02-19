@@ -6,7 +6,11 @@
 			  ['$scope',
 			   '$rootScope', 
 			   '$geolocation',
-			   '$state','$filter','metaDataFactory','MetadataService',function($scope,$rootScope,$geolocation,$state,$filter,metaDataFactory,MetadataService) {
+			   '$state',
+			   '$filter',
+			   'MetadataService',
+			   'ListingService', 
+			   function($scope,$rootScope,$geolocation,$state,$filter,MetadataService,ListingService) {
 			
 		     $scope.phone_pattern=/^((\+)|(00)|(\*)|())[0-9]{10,14}((\#)|())$/;	
 		     
@@ -24,7 +28,7 @@
 			 $scope.features = [];
 			 
 			  $scope.provider = {
-					  venues : [ {name:'',capacity:'',price:''}],
+					  venues : [ ],
 					  features : [ ],
 					  services : [ ],
 					  events : [ ],
@@ -51,7 +55,7 @@
 					};
 					  
 				  $scope.canSave = function(){
-					  return $scope.provider.agree && $scope.canGoNext && $scope.hasEventtypes && $scope.isVenuesWithVenueSpace;
+					  return $scope.provider.agree && $scope.canGoNext() && $scope.hasEventtypes() && $scope.isVenuesWithVenueSpace();
 				  }	;  
 				  
 				  $scope.toJSON = function(obj) {
@@ -79,13 +83,15 @@
 			 $scope.hasVenue = function(){
 				 if ($scope.provider.category === undefined) return false;
 				 if ($scope.provider.category.type === undefined) return false;
-				 return $scope.provider.category.type == "Venues";
+				 return $scope.provider.category.type === "Venues";
 			 };
 			 
+			 /*
+			  * Returns true for no Venues providers
+			  */
 			 $scope.isVenuesWithVenueSpace = function(){
-				 if ($scope.provider.venues === undefined) return false;
-					
-				return  $scope.hasVenue ? $scope.provider.venues.length > 0 : true;
+				 if (!$scope.hasVenue()|| $scope.provider.venues === undefined) return true;
+					return $scope.provider.venues.length > 0;	
 			 };
 			 
 			 $scope.hasServices = function(){
@@ -169,8 +175,16 @@
 //				}
 			
 		$scope.submitListing = function(){
-			//console.log(angular.toJson($scope.provider,true));
-			$state.go("register.registered");
+			$scope.httpResponse = {};
+			ListingService.save({},$scope.provider, function(httpResponse,responseHeaders){
+				$scope.httpResponse = httpResponse; // think of returning listing code , for future correspondence
+				$scope.provider = {};
+				$state.go("register.registered");
+			},function(httpResponse){
+				$scope.httpResponse = httpResponse.data;
+				$state.go("register.start");
+			});
+			
 		};	 
 		
 			 

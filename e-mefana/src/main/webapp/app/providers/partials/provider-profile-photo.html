@@ -1,11 +1,11 @@
 	<div class="panel panel-warning"">
-     <div class="panel-heading"><h5>Choose a photo to represent this listing  
+     <div class="panel-heading"><h5>Choose a photo to represent this listing  <i class="glyphicon glyphicon-star star" ng-show="showError(listingForm.photo, 'required')" ></i>
      <button popover-placement="top" popover="I fade in and out! A description list is perfect for defining termsA description list is perfect for defining termsA description list is perfect for defining terms"   popover-trigger="focus" class="btn">?</button></h5></div>
 			  <div class="panel-body">
 				<div class="row">
 				<div class="form-group" >
 				<div class="col-md-6">
-					<input type="file" ng-model="provider.photo"  base-sixty-four-input required>
+					<input type="file" name="photo" ng-model="provider.photo"  base-sixty-four-input required>
 					 <p>
 						    <b>File Name: </b> {{provider.photo.filename}}
 						  </p>

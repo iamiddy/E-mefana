@@ -20,6 +20,10 @@
 						<!-- REGISTER -->
 						<div class="col-md-8">
 							<registration-header></registration-header>
+							<div ng-show="httpResponse.statusCode == 400">
+							<span class="error">Please correct the following identified errors before submitting this listing </span>
+							   <alert ng-repeat="alert in httpResponse.messages" type="danger" >{{alert}}</alert>
+							</div>
 								
 							<form  method="post" name="listingForm"  novalidate="novalidate">
 							  <div ui-view></div>
@@ -42,3 +46,4 @@
   Form: <pre ng-bind="toJSON(listingForm)"></pre>  -->
   
  <!--  <pre>{{cities | filter:'Dar es Salaam'}}</pre> -->
+ <!-- <pre>{{isVenuesWithVenueSpace()}} </pre> -->

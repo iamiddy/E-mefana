@@ -13,3 +13,17 @@ providerServices.factory('MetaService', ['$resource',function($resource){
 	  });
   
 }]);
+
+providerServices.factory('ListingService', ['$resource',function($resource){
+    return $resource('api/provider', {},{
+			    save : {
+					method : 'POST',
+					headers : {
+						       'Accept': 'application/json',
+						       'Content-Type': 'application/json'
+						},
+					isArray: false
+			  }
+	  });
+  
+}]);
