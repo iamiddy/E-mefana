@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.util.Optional;
 
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.idrene.emefana.AbstractIntegrationTest;
 
@@ -21,6 +22,9 @@ import com.idrene.emefana.AbstractIntegrationTest;
  * @since 1.0
  */
 public class UtililityBeanTest extends AbstractIntegrationTest{
+	
+	@Autowired
+	UtilityBean utilityBean;
 	
 	//@Test
 	public void InputStreamToBase64Test() throws IOException{
@@ -70,6 +74,13 @@ public class UtililityBeanTest extends AbstractIntegrationTest{
 			assertTrue(p.matches(pattern));
 		}
 		
+	}
+	
+	@Test
+	public void testEncodeDecode(){
+		String encoded = utilityBean.encodePropertyValue("OmG");
+		assertTrue("OmG".equals(utilityBean.decodePropertyValue(encoded)));
+		//System.out.println(utilityBean.decodePropertyValue("0OHCtQvIADiGuMnJNkJpimbLgiU1Y1Oc"));
 	}
 	
 	

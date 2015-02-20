@@ -79,6 +79,16 @@
 		<!-- spring dependencies -->
 		<dependency>
 			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
 		</dependency>
 		<dependency>
@@ -218,6 +228,19 @@
 			<scope>compile</scope>
 		</dependency>
 
+		<!-- Mail -->
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.5.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.activation</groupId>
+			<artifactId>activation</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+
 
 	</dependencies>
 	<build>
@@ -238,22 +261,11 @@
 					</execution>
 				</executions>
 			</plugin>
-			 <plugin>
-                <groupId>org.jsonschema2pojo</groupId>
-                <artifactId>jsonschema2pojo-maven-plugin</artifactId>
-                <version>0.4.7</version>
-                <configuration>
-                    <sourceDirectory>${basedir}/src/main/resources/schema</sourceDirectory>
-                    <targetPackage>com.idrene.emefana.rest.resources.types</targetPackage>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+			<!-- <plugin> <groupId>org.jsonschema2pojo</groupId> <artifactId>jsonschema2pojo-maven-plugin</artifactId> 
+				<version>0.4.7</version> <configuration> <sourceDirectory>${basedir}/src/main/resources/schema</sourceDirectory> 
+				<targetPackage>com.idrene.emefana.rest.resources.types</targetPackage> </configuration> 
+				<executions> <execution> <goals> <goal>generate</goal> </goals> </execution> 
+				</executions> </plugin> -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>

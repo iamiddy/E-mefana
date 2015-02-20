@@ -3,6 +3,8 @@
  */
 package com.idrene.emefana.config;
 
+import java.util.Properties;
+
 import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.jasypt.util.password.PasswordEncryptor;
 import org.jasypt.util.text.BasicTextEncryptor;
@@ -15,6 +17,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import com.idrene.emefana.util.UtilityBean;
 
@@ -32,29 +35,53 @@ public class ServiceConfig {
 	
 	@Value("$app.encoder.key")
 	private String app_encrypt;
+	
+	@Value("${mail.smtp.host}")
+	private String mailHost;
+	
+	@Value("${mail.smtp.port}")
+	private int mailPort;
+	
+	@Value("${mail.smtp.protocal}")
+	private String mailProtocal;
+	
+	@Value("${mail.smtp.user}")
+	private String mailUser;
+	
+	@Value("${mail.smtp.password}")
+	private String mailPassword;
+	
+	@Value("${mail.smtp.auth}")
+	private boolean mailAuth;
+	
+	@Value("${mail.smtp.starttls.enable}")
+	private boolean mailStarttls;
 
 	@Bean
 	public static PropertySourcesPlaceholderConfigurer placeHolderConfigurer() {
 		return new PropertySourcesPlaceholderConfigurer();
 	}
 
-	// @Bean
-	// public JavaMailSenderImpl javaMailSenderImpl() {
-	// JavaMailSenderImpl mailSenderImpl = new JavaMailSenderImpl();
-	// mailSenderImpl.setHost(env.getProperty("smtp.host"));
-	// mailSenderImpl.setPort(env.getProperty("smtp.port", Integer.class));
-	// mailSenderImpl.setProtocol(env.getProperty("smtp.protocol"));
-	// mailSenderImpl.setUsername(env.getProperty("smtp.username"));
-	// mailSenderImpl.setPassword(env.getProperty("smtp.password"));
-	//
-	// Properties javaMailProps = new Properties();
-	// javaMailProps.put("mail.smtp.auth", true);
-	// javaMailProps.put("mail.smtp.starttls.enable", true);
-	//
-	// mailSenderImpl.setJavaMailProperties(javaMailProps);
-	//
-	// return mailSenderImpl;
-	// }
+	 /*
+	  * https://support.google.com/mail/answer/13287?hl=en
+	  */
+	@Bean
+	 public JavaMailSenderImpl javaMailSenderImpl() {
+	 JavaMailSenderImpl mailSenderImpl = new JavaMailSenderImpl();
+	 mailSenderImpl.setHost(mailHost);
+	 mailSenderImpl.setPort(mailPort);
+	// mailSenderImpl.setProtocol(mailProtocal); // use default
+	 mailSenderImpl.setUsername(mailUser);
+	 mailSenderImpl.setPassword(utilityBean().decodePropertyValue(mailPassword));
+	
+	 Properties javaMailProps = new Properties();
+	 javaMailProps.put("mail.smtp.auth", mailAuth);
+	 javaMailProps.put("mail.smtp.starttls.enable", mailStarttls);
+	
+	 mailSenderImpl.setJavaMailProperties(javaMailProps);
+	
+	 return mailSenderImpl;
+	 }
 	@Bean
 	public CacheManager cacheManager() {
 		return new ConcurrentMapCacheManager();
