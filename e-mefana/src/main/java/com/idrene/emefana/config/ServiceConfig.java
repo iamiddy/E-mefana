@@ -18,6 +18,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.ui.velocity.VelocityEngineFactoryBean;
 
 import com.idrene.emefana.util.UtilityBean;
 
@@ -82,6 +83,7 @@ public class ServiceConfig {
 	
 	 return mailSenderImpl;
 	 }
+	
 	@Bean
 	public CacheManager cacheManager() {
 		return new ConcurrentMapCacheManager();
@@ -103,4 +105,13 @@ public class ServiceConfig {
 	public PasswordEncryptor passwordEncryptor(){
 		return new BasicPasswordEncryptor();
 	}
+	
+	@Bean public VelocityEngineFactoryBean velocityEngine(){
+		  VelocityEngineFactoryBean velocityEngineFactoryBean=new VelocityEngineFactoryBean();
+		  Properties velocityProperties=new Properties();
+		  velocityProperties.setProperty("resource.loader","class");
+		  velocityProperties.setProperty("class.resource.loader.class","org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
+		  velocityEngineFactoryBean.setVelocityProperties(velocityProperties);
+		  return velocityEngineFactoryBean;
+		}
 }

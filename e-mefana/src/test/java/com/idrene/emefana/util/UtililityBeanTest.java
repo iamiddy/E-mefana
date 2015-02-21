@@ -26,14 +26,14 @@ public class UtililityBeanTest extends AbstractIntegrationTest{
 	@Autowired
 	UtilityBean utilityBean;
 	
-	//@Test
+	@Test
 	public void InputStreamToBase64Test() throws IOException{
 		String base64 = UtilityBean.InputStreamToBase64(Optional.ofNullable(resource.getInputStream()), "jpg").get();
 		assertNotNull(base64);
 		assertTrue(base64.contains("data:image/jpg;base64")); 
 	}
 	
-	//@Test
+	@Test
 	public void Base64ToInputStreamTest() throws IOException{
 		String base64 = UtilityBean.InputStreamToBase64(Optional.ofNullable(resource.getInputStream()), "jpg").get();
 		assertNotNull(base64);

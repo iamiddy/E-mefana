@@ -3,15 +3,27 @@
  */
 package com.idrene.emefana.service;
 
+import java.io.IOException;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.velocity.VelocityEngineFactoryBean;
+import org.springframework.ui.velocity.VelocityEngineUtils;
 
 import com.idrene.emefana.rest.resources.ListingResource;
+import com.idrene.emefana.util.UtilityBean;
 
 /**
  * @author iddymagohe
@@ -24,13 +36,44 @@ public interface MailService {
 
 @Service
 class MailServiceImpl implements MailService{
+	protected static final Resource resource = new ClassPathResource("velocity/images/logo.png");
+	
 	
 	@Autowired
-	private JavaMailSenderImpl sender;
+	private JavaMailSenderImpl mailSender;
+	
+	@Autowired
+	private VelocityEngineFactoryBean velocityEngine;
 
 	@Override
 	public void sendMail(ListingResource provider)  {
-		MimeMessage message = sender.createMimeMessage();
+		MimeMessagePreparator preparator = new MimeMessagePreparator() {
+	        @SuppressWarnings({ "rawtypes", "unchecked" })
+			public void prepare(MimeMessage mimeMessage) throws Exception {
+	             MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
+	             message.setTo("iddyiam@gmail.com");
+	             message.setBcc("iddy85@gmail.com");
+	            // message.setFrom(new InternetAddress(suggestedPodcast.getEmail()) );
+	             message.setSubject("New suggested Listing");
+	             message.setSentDate(new Date());
+	             Map model = new HashMap();	             
+	             model.put("message", "Looks great");
+	             model.put("name", "Jumbo");
+	             model.put("businessname", "Jumbo");
+	             model.put("email", "Jumbo@emefana.com");
+	             model.put("logo", MailServiceImpl.getBase64Logo());
+	             
+	             String text = VelocityEngineUtils.mergeTemplateIntoString(
+	                velocityEngine.getObject(), "velocity/suggestedListingNotificationMessage.vm", "UTF-8", model);
+	             message.setText(text, true);
+	          }
+	       };
+	       mailSender.send(preparator);	
+	}
+	
+	void simplemail(){
+
+		MimeMessage message = mailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message);
 		
 		//TODO work with Velocity template
@@ -44,7 +87,18 @@ class MailServiceImpl implements MailService{
 			//Notify listeners for dbLogging & later re-try
 			e.printStackTrace();
 		}
-		sender.send(message);
+		mailSender.send(message);
+	}
+	
+	public static String getBase64Logo(){
+		String logo="";
+		try {
+		logo =	UtilityBean.InputStreamToBase64(Optional.of(resource.getInputStream()), "png").get();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return logo;
 	}
 	
 }
