@@ -46,9 +46,9 @@ public class ListingResourceController {
 						.body(new ResponseStatus(HttpStatus.CREATED.value(),HttpStatus.CREATED.getReasonPhrase()));
 			}catch(Exception ex){
 				//Log exception here
-			}
 			response = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 					.body(new ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR.value(),HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase()));
+			}
 		}
 		
 		return response;

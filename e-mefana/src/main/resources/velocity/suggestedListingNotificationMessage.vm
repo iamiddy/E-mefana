@@ -60,13 +60,19 @@
 												</tr>
 												<tr>
 													<td width="100%" style=" font-size: 14px; line-height: 24px; font-family:helvetica, Arial, sans-serif; text-align: left; color:#87919F;">	
-														<p>From - ${name} / ${email}</p>
-		                                                ${businessname},${message}
-														Lorem ipsum dolor sit amet, consectetur adipis icing elit, sed do eiusmod tempor 
-														incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. Duis aute 
-														irure dolor in repreh enderit in voluptate velit esse cill fugiat nulla pariatur. 
-														Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt 
-														mollit anim id est laborum.
+														
+														<p>Hello ${listing.user.firstname} ${listing.user.lastname}, </p>
+
+														Thank you for submitting ${listing.name} to E-mefana.&nbsp;
+														Our team will verify that this business meets our listing guidelines from the information provided
+														and email you for the next steps.You can review our listings guidelines <a href="#">here.</a>
+														<p>
+														  For the time being feel free to email us should you have questions about our listing review and approval process.
+														</p>
+														<p>
+														Thank you <br/>
+														E-mefana Listings Review Team
+														</p>
 													</td>
 												</tr>
 												<tr>
@@ -75,7 +81,6 @@
 											</tbody>
 										</table>
 										<!-- /Headline Header -->
-
 									</td>
 								</tr>
 							</tbody>
@@ -94,9 +99,9 @@
 												</tr>
 												<tr><!-- subscribe / unsubscribe -->
 													<td width="100%" style="font-family:helvetica, Arial, sans-serif; font-size: 11px; text-align: center; color: rgb(119, 119, 119); line-height: 21px; font-style: italic;">
-														<a href="#" style="text-decoration: none; color: #F07057;">Subscribe</a> 
+														<!-- <a href="#" style="text-decoration: none; color: #F07057;">Subscribe</a> 
 														/ 
-														<a href="#" style="text-decoration: none; color: #F07057;">Unsubscribe</a>
+														<a href="#" style="text-decoration: none; color: #F07057;">Unsubscribe</a> -->
 													</td>
 												</tr>
 											</tbody>

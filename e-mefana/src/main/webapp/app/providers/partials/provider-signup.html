@@ -20,15 +20,19 @@
 						<!-- REGISTER -->
 						<div class="col-md-8">
 							<registration-header></registration-header>
-							<div ng-show="httpResponse.statusCode == 400">
+							<div ng-if="httpResponse.statusCode == 400">
 							<span class="error">Please correct the following identified errors before submitting this listing </span>
 							   <alert ng-repeat="alert in httpResponse.messages" type="danger" >{{alert}}</alert>
 							</div>
-								
-							<form  method="post" name="listingForm"  novalidate="novalidate">
-							  <div ui-view></div>
-							</form>
-
+							
+							<div ng-if="httpResponse.statusCode >= 500">
+							<span class="error">Our Back-end  services are experiencing some technical difficulties, please try again this submission a little later </span>
+							</div>
+							<div cg-busy="listingSubmission">
+								<form  method="post" name="listingForm"  novalidate="novalidate">
+								  <div ui-view></div>
+								</form>
+                          </div>	
 						</div>
 						<!-- /REGISTER -->
 

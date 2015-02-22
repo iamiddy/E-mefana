@@ -5,6 +5,7 @@ angular.module('providerApp', [
 		'ngCookies', 
 		'checklist-model',
 		'naif.base64',
+		'cgBusy',
         'providerControllers',
         'providerFilters',
         'providerServices',

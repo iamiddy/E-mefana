@@ -173,10 +173,11 @@
 //				  "filename": "profile.jpg",
 //				  "base64":   "/9j/4AAQSkZJRgABAgAAAQABAAD//gAEKgD/4gIcSUNDX1BST0ZJTEUAAQEAAAIMbGNtcwIQA..."
 //				}
-			
+			 
+			 $scope.provider.name="";
 		$scope.submitListing = function(){
 			$scope.httpResponse = {};
-			ListingService.save({},$scope.provider, function(httpResponse,responseHeaders){
+			$scope.listingSubmission = ListingService.save({},$scope.provider, function(httpResponse,responseHeaders){
 				$scope.httpResponse = httpResponse; // think of returning listing code , for future correspondence
 				$scope.provider = {};
 				$state.go("register.registered");

@@ -27,6 +27,9 @@ import com.idrene.emefana.repositories.ServiceOfferingRepository;
  */
 public interface MetaService {
 	
+	/**
+	 * @return meta-data for client
+	 */
 	public List<MetaResource<?>>retrieveMeta();
 
 }

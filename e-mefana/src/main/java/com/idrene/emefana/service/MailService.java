@@ -36,8 +36,10 @@ public interface MailService {
 
 @Service
 class MailServiceImpl implements MailService{
+	/*
+	 * TODO observer for email notification
+	 */
 	protected static final Resource resource = new ClassPathResource("velocity/images/logo.png");
-	
 	
 	@Autowired
 	private JavaMailSenderImpl mailSender;
@@ -46,21 +48,18 @@ class MailServiceImpl implements MailService{
 	private VelocityEngineFactoryBean velocityEngine;
 
 	@Override
-	public void sendMail(ListingResource provider)  {
+	public void sendMail(final ListingResource provider)  {
 		MimeMessagePreparator preparator = new MimeMessagePreparator() {
 	        @SuppressWarnings({ "rawtypes", "unchecked" })
 			public void prepare(MimeMessage mimeMessage) throws Exception {
 	             MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
-	             message.setTo("iddyiam@gmail.com");
+	             message.setTo(provider.getUser().getEmailaddress());
 	             message.setBcc("iddy85@gmail.com");
 	            // message.setFrom(new InternetAddress(suggestedPodcast.getEmail()) );
-	             message.setSubject("New suggested Listing");
+	             message.setSubject("New suggested Listing - " + provider.getName() );
 	             message.setSentDate(new Date());
 	             Map model = new HashMap();	             
-	             model.put("message", "Looks great");
-	             model.put("name", "Jumbo");
-	             model.put("businessname", "Jumbo");
-	             model.put("email", "Jumbo@emefana.com");
+	             model.put("listing", provider);
 	             model.put("logo", MailServiceImpl.getBase64Logo());
 	             
 	             String text = VelocityEngineUtils.mergeTemplateIntoString(
@@ -76,8 +75,6 @@ class MailServiceImpl implements MailService{
 		MimeMessage message = mailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message);
 		
-		//TODO work with Velocity template
-		
 		try {
 			helper.setTo("iddyiam85@gmail.com");
 			helper.setText("Thank you for Registering with Emefana! test");
@@ -92,6 +89,7 @@ class MailServiceImpl implements MailService{
 	
 	public static String getBase64Logo(){
 		String logo="";
+		Integer c;
 		try {
 		logo =	UtilityBean.InputStreamToBase64(Optional.of(resource.getInputStream()), "png").get();
 		} catch (IOException e) {
