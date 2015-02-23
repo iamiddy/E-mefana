@@ -47,8 +47,10 @@ public interface EmefanaService {
 	public Optional<List<Booking>> retriveUserBookings(User user);
 
 	public Optional<User> registerUser(User user) throws EntityExists;
+	
 	public Optional<Provider> registerProvider(Provider provider) throws EntityExists;
 	//TODO add , retrieval and associated file contents to providers via #{@link #GridFsService}
+	//TODO associate provider user save 
 
 }
 
@@ -146,6 +148,9 @@ class EmefanaServiceImpl implements EmefanaService {
 		provider.setPid(UtilityBean.generateProviderId());
 		provider.setCode(UtilityBean.generateProviderCode(provider.getPid()));
 		dbProvider = Optional.of(providerRepository.save(provider));
+		//TODO fileSave
+		//TODO UserSave
+		
 		return  dbProvider;
 	}
 	

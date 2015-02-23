@@ -3,7 +3,9 @@
  */
 package com.idrene.emefana.config;
 
+import java.util.HashSet;
 import java.util.Properties;
+import java.util.Set;
 
 import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.jasypt.util.password.PasswordEncryptor;
@@ -16,10 +18,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.ConversionServiceFactoryBean;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.core.convert.ConversionService;
+import org.springframework.core.convert.converter.Converter;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.ui.velocity.VelocityEngineFactoryBean;
 
+import com.idrene.emefana.service.request.converter.ListingResourceToProvider;
 import com.idrene.emefana.util.UtilityBean;
 
 /**
@@ -114,4 +120,20 @@ public class ServiceConfig {
 		  velocityEngineFactoryBean.setVelocityProperties(velocityProperties);
 		  return velocityEngineFactoryBean;
 		}
+	
+	@Bean (name="conversionService")
+	public ConversionService conversionService(){
+		ConversionServiceFactoryBean conversionService = new ConversionServiceFactoryBean();
+		conversionService.setConverters(converters());
+		conversionService.afterPropertiesSet();
+		return conversionService.getObject();
+	}
+	
+	
+	@SuppressWarnings({ "rawtypes" })
+	private Set<Converter> converters() {
+        Set<Converter> converters = new HashSet<>();
+        converters.add(new ListingResourceToProvider());
+        return converters;
+    }
 }

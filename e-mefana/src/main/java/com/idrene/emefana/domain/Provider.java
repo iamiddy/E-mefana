@@ -56,7 +56,11 @@ public class Provider {
 	
 	@Getter @Setter private String hours;
 	
+	@Transient
+	@Getter @Setter private User providerUser;
+	
 	@Getter @Setter private Set<ProviderEvents> events = new HashSet<>();
+	@Getter @Setter private Set<VenuesDetail> venuesDetails = new HashSet<>();
 	
 	@Getter @Setter private List<Feature> features = new LinkedList<>();
 	

@@ -17,6 +17,7 @@ public class Address {
 	
 	@Getter @Setter private String street;
 	
+	@Getter @Setter private String streetLine2;
 	@DBRef
 	@Getter @Setter private City city;
 
